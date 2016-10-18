@@ -1,0 +1,2749 @@
+
+R version 3.3.1 (2016-06-21) -- "Bug in Your Hair"
+Copyright (C) 2016 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin13.4.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[Previously saved workspace restored]
+
+> deployments <- readr::read_csv('data/deploy.csv')
+Parsed with column specification:
+cols(
+  speno = col_character(),
+  spot_deployid = col_character(),
+  spot_ptt = col_integer(),
+  splash_deployid = col_character(),
+  splash_ptt = col_integer(),
+  lhx = col_character(),
+  age = col_character(),
+  sex = col_character(),
+  mass = col_double()
+)
+> 
+> for(i in 1:nrow(deployments)) {
++   speno <- deployments$speno[i]
++   spot_deployid <- deployments$spot_deployid[i]
++   splash_deployid <- deployments$splash_deployid[i]
++ rmarkdown::render("aleutpv2016_status_report_by_speno.Rmd", 
++                   output_file = paste0("www-aleutpv-2016//reports//",speno, "_status_report.html"),
++ params = list(
++   speno = speno,
++   spot_deployid = spot_deployid,
++   splash_deployid = splash_deployid
++ ))
++ }
+
+
+processing file: aleutpv2016_status_report_by_speno.Rmd
+  |                                                                         |                                                                 |   0%  |                                                                         |.....                                                            |   7%
+   inline R code fragments
+
+  |                                                                         |.........                                                        |  14%
+label: setup (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |..............                                                   |  21%
+  ordinary text without R code
+
+  |                                                                         |...................                                              |  29%
+label: load-packages (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |.......................                                          |  36%
+  ordinary text without R code
+
+  |                                                                         |............................                                     |  43%
+label: get-data (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |................................                                 |  50%
+   inline R code fragments
+
+  |                                                                         |.....................................                            |  57%
+label: leaflet-map (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                         |..........................................                       |  64%
+  ordinary text without R code
+
+  |                                                                         |..............................................                   |  71%
+label: haul-out-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |...................................................              |  79%
+  ordinary text without R code
+
+  |                                                                         |........................................................         |  86%
+label: dive-behav-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 6
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |............................................................     |  93%
+  ordinary text without R code
+
+  |                                                                         |.................................................................| 100%
+label: msg-tx-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+
+output file: aleutpv2016_status_report_by_speno.knit.md
+
+/usr/local/bin/pandoc +RTS -K512m -RTS aleutpv2016_status_report_by_speno.utf8.md --to html --from markdown+autolink_bare_uris+ascii_identifiers+tex_math_single_backslash --output www-aleutpv-2016//reports//PV2014_2005_status_report.html --smart --email-obfuscation none --self-contained '--variable=agency-logo:/Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/noaa-fisheries-rgb-stacked.png' --standalone --section-divs --template /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/template.html --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/uswds-0.11.0/css/uswds.min.css --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/styles.css --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/rmarkdown-strc60f3d2d0a62.html --mathjax --variable 'mathjax-url:https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --no-highlight --variable highlightjs=/Users/josh.london/Library/R/3.3/library/rmarkdown/rmd/h/highlight --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/usweb_includes.html 
+
+Output created: www-aleutpv-2016//reports//PV2014_2005_status_report.html
+
+
+processing file: aleutpv2016_status_report_by_speno.Rmd
+  |                                                                         |                                                                 |   0%  |                                                                         |.....                                                            |   7%
+   inline R code fragments
+
+  |                                                                         |.........                                                        |  14%
+label: setup (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |..............                                                   |  21%
+  ordinary text without R code
+
+  |                                                                         |...................                                              |  29%
+label: load-packages (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |.......................                                          |  36%
+  ordinary text without R code
+
+  |                                                                         |............................                                     |  43%
+label: get-data (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |................................                                 |  50%
+   inline R code fragments
+
+  |                                                                         |.....................................                            |  57%
+label: leaflet-map (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                         |..........................................                       |  64%
+  ordinary text without R code
+
+  |                                                                         |..............................................                   |  71%
+label: haul-out-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |...................................................              |  79%
+  ordinary text without R code
+
+  |                                                                         |........................................................         |  86%
+label: dive-behav-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 6
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |............................................................     |  93%
+  ordinary text without R code
+
+  |                                                                         |.................................................................| 100%
+label: msg-tx-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+
+output file: aleutpv2016_status_report_by_speno.knit.md
+
+/usr/local/bin/pandoc +RTS -K512m -RTS aleutpv2016_status_report_by_speno.utf8.md --to html --from markdown+autolink_bare_uris+ascii_identifiers+tex_math_single_backslash --output www-aleutpv-2016//reports//PV2016_3011_status_report.html --smart --email-obfuscation none --self-contained '--variable=agency-logo:/Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/noaa-fisheries-rgb-stacked.png' --standalone --section-divs --template /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/template.html --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/uswds-0.11.0/css/uswds.min.css --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/styles.css --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/rmarkdown-strc60f3b9a972b.html --mathjax --variable 'mathjax-url:https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --no-highlight --variable highlightjs=/Users/josh.london/Library/R/3.3/library/rmarkdown/rmd/h/highlight --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/usweb_includes.html 
+
+Output created: www-aleutpv-2016//reports//PV2016_3011_status_report.html
+
+
+processing file: aleutpv2016_status_report_by_speno.Rmd
+  |                                                                         |                                                                 |   0%  |                                                                         |.....                                                            |   7%
+   inline R code fragments
+
+  |                                                                         |.........                                                        |  14%
+label: setup (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |..............                                                   |  21%
+  ordinary text without R code
+
+  |                                                                         |...................                                              |  29%
+label: load-packages (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |.......................                                          |  36%
+  ordinary text without R code
+
+  |                                                                         |............................                                     |  43%
+label: get-data (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |................................                                 |  50%
+   inline R code fragments
+
+  |                                                                         |.....................................                            |  57%
+label: leaflet-map (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                         |..........................................                       |  64%
+  ordinary text without R code
+
+  |                                                                         |..............................................                   |  71%
+label: haul-out-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |...................................................              |  79%
+  ordinary text without R code
+
+  |                                                                         |........................................................         |  86%
+label: dive-behav-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 6
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |............................................................     |  93%
+  ordinary text without R code
+
+  |                                                                         |.................................................................| 100%
+label: msg-tx-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+
+output file: aleutpv2016_status_report_by_speno.knit.md
+
+/usr/local/bin/pandoc +RTS -K512m -RTS aleutpv2016_status_report_by_speno.utf8.md --to html --from markdown+autolink_bare_uris+ascii_identifiers+tex_math_single_backslash --output www-aleutpv-2016//reports//PV2016_3012_status_report.html --smart --email-obfuscation none --self-contained '--variable=agency-logo:/Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/noaa-fisheries-rgb-stacked.png' --standalone --section-divs --template /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/template.html --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/uswds-0.11.0/css/uswds.min.css --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/styles.css --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/rmarkdown-strc60f2c5ba461.html --mathjax --variable 'mathjax-url:https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --no-highlight --variable highlightjs=/Users/josh.london/Library/R/3.3/library/rmarkdown/rmd/h/highlight --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/usweb_includes.html 
+
+Output created: www-aleutpv-2016//reports//PV2016_3012_status_report.html
+
+
+processing file: aleutpv2016_status_report_by_speno.Rmd
+  |                                                                         |                                                                 |   0%  |                                                                         |.....                                                            |   7%
+   inline R code fragments
+
+  |                                                                         |.........                                                        |  14%
+label: setup (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |..............                                                   |  21%
+  ordinary text without R code
+
+  |                                                                         |...................                                              |  29%
+label: load-packages (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |.......................                                          |  36%
+  ordinary text without R code
+
+  |                                                                         |............................                                     |  43%
+label: get-data (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |................................                                 |  50%
+   inline R code fragments
+
+  |                                                                         |.....................................                            |  57%
+label: leaflet-map (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                         |..........................................                       |  64%
+  ordinary text without R code
+
+  |                                                                         |..............................................                   |  71%
+label: haul-out-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |...................................................              |  79%
+  ordinary text without R code
+
+  |                                                                         |........................................................         |  86%
+label: dive-behav-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 6
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |............................................................     |  93%
+  ordinary text without R code
+
+  |                                                                         |.................................................................| 100%
+label: msg-tx-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+
+output file: aleutpv2016_status_report_by_speno.knit.md
+
+/usr/local/bin/pandoc +RTS -K512m -RTS aleutpv2016_status_report_by_speno.utf8.md --to html --from markdown+autolink_bare_uris+ascii_identifiers+tex_math_single_backslash --output www-aleutpv-2016//reports//PV2016_3016_status_report.html --smart --email-obfuscation none --self-contained '--variable=agency-logo:/Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/noaa-fisheries-rgb-stacked.png' --standalone --section-divs --template /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/template.html --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/uswds-0.11.0/css/uswds.min.css --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/styles.css --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/rmarkdown-strc60f19e783df.html --mathjax --variable 'mathjax-url:https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --no-highlight --variable highlightjs=/Users/josh.london/Library/R/3.3/library/rmarkdown/rmd/h/highlight --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/usweb_includes.html 
+
+Output created: www-aleutpv-2016//reports//PV2016_3016_status_report.html
+
+
+processing file: aleutpv2016_status_report_by_speno.Rmd
+  |                                                                         |                                                                 |   0%  |                                                                         |.....                                                            |   7%
+   inline R code fragments
+
+  |                                                                         |.........                                                        |  14%
+label: setup (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |..............                                                   |  21%
+  ordinary text without R code
+
+  |                                                                         |...................                                              |  29%
+label: load-packages (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |.......................                                          |  36%
+  ordinary text without R code
+
+  |                                                                         |............................                                     |  43%
+label: get-data (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |................................                                 |  50%
+   inline R code fragments
+
+  |                                                                         |.....................................                            |  57%
+label: leaflet-map (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                         |..........................................                       |  64%
+  ordinary text without R code
+
+  |                                                                         |..............................................                   |  71%
+label: haul-out-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |...................................................              |  79%
+  ordinary text without R code
+
+  |                                                                         |........................................................         |  86%
+label: dive-behav-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 6
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |............................................................     |  93%
+  ordinary text without R code
+
+  |                                                                         |.................................................................| 100%
+label: msg-tx-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+
+output file: aleutpv2016_status_report_by_speno.knit.md
+
+/usr/local/bin/pandoc +RTS -K512m -RTS aleutpv2016_status_report_by_speno.utf8.md --to html --from markdown+autolink_bare_uris+ascii_identifiers+tex_math_single_backslash --output www-aleutpv-2016//reports//PV2016_3019_status_report.html --smart --email-obfuscation none --self-contained '--variable=agency-logo:/Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/noaa-fisheries-rgb-stacked.png' --standalone --section-divs --template /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/template.html --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/uswds-0.11.0/css/uswds.min.css --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/styles.css --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/rmarkdown-strc60f70d632d8.html --mathjax --variable 'mathjax-url:https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --no-highlight --variable highlightjs=/Users/josh.london/Library/R/3.3/library/rmarkdown/rmd/h/highlight --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/usweb_includes.html 
+
+Output created: www-aleutpv-2016//reports//PV2016_3019_status_report.html
+
+
+processing file: aleutpv2016_status_report_by_speno.Rmd
+  |                                                                         |                                                                 |   0%  |                                                                         |.....                                                            |   7%
+   inline R code fragments
+
+  |                                                                         |.........                                                        |  14%
+label: setup (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |..............                                                   |  21%
+  ordinary text without R code
+
+  |                                                                         |...................                                              |  29%
+label: load-packages (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |.......................                                          |  36%
+  ordinary text without R code
+
+  |                                                                         |............................                                     |  43%
+label: get-data (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |................................                                 |  50%
+   inline R code fragments
+
+  |                                                                         |.....................................                            |  57%
+label: leaflet-map (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                         |..........................................                       |  64%
+  ordinary text without R code
+
+  |                                                                         |..............................................                   |  71%
+label: haul-out-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |...................................................              |  79%
+  ordinary text without R code
+
+  |                                                                         |........................................................         |  86%
+label: dive-behav-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 6
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |............................................................     |  93%
+  ordinary text without R code
+
+  |                                                                         |.................................................................| 100%
+label: msg-tx-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+
+output file: aleutpv2016_status_report_by_speno.knit.md
+
+/usr/local/bin/pandoc +RTS -K512m -RTS aleutpv2016_status_report_by_speno.utf8.md --to html --from markdown+autolink_bare_uris+ascii_identifiers+tex_math_single_backslash --output www-aleutpv-2016//reports//PV2016_3022_status_report.html --smart --email-obfuscation none --self-contained '--variable=agency-logo:/Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/noaa-fisheries-rgb-stacked.png' --standalone --section-divs --template /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/template.html --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/uswds-0.11.0/css/uswds.min.css --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/styles.css --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/rmarkdown-strc60f4b11884d.html --mathjax --variable 'mathjax-url:https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --no-highlight --variable highlightjs=/Users/josh.london/Library/R/3.3/library/rmarkdown/rmd/h/highlight --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/usweb_includes.html 
+
+Output created: www-aleutpv-2016//reports//PV2016_3022_status_report.html
+
+
+processing file: aleutpv2016_status_report_by_speno.Rmd
+  |                                                                         |                                                                 |   0%  |                                                                         |.....                                                            |   7%
+   inline R code fragments
+
+  |                                                                         |.........                                                        |  14%
+label: setup (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |..............                                                   |  21%
+  ordinary text without R code
+
+  |                                                                         |...................                                              |  29%
+label: load-packages (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |.......................                                          |  36%
+  ordinary text without R code
+
+  |                                                                         |............................                                     |  43%
+label: get-data (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |................................                                 |  50%
+   inline R code fragments
+
+  |                                                                         |.....................................                            |  57%
+label: leaflet-map (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                         |..........................................                       |  64%
+  ordinary text without R code
+
+  |                                                                         |..............................................                   |  71%
+label: haul-out-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |...................................................              |  79%
+  ordinary text without R code
+
+  |                                                                         |........................................................         |  86%
+label: dive-behav-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 6
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |............................................................     |  93%
+  ordinary text without R code
+
+  |                                                                         |.................................................................| 100%
+label: msg-tx-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+
+output file: aleutpv2016_status_report_by_speno.knit.md
+
+/usr/local/bin/pandoc +RTS -K512m -RTS aleutpv2016_status_report_by_speno.utf8.md --to html --from markdown+autolink_bare_uris+ascii_identifiers+tex_math_single_backslash --output www-aleutpv-2016//reports//PV2016_3027_status_report.html --smart --email-obfuscation none --self-contained '--variable=agency-logo:/Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/noaa-fisheries-rgb-stacked.png' --standalone --section-divs --template /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/template.html --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/uswds-0.11.0/css/uswds.min.css --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/styles.css --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/rmarkdown-strc60fa91e033.html --mathjax --variable 'mathjax-url:https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --no-highlight --variable highlightjs=/Users/josh.london/Library/R/3.3/library/rmarkdown/rmd/h/highlight --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/usweb_includes.html 
+
+Output created: www-aleutpv-2016//reports//PV2016_3027_status_report.html
+
+
+processing file: aleutpv2016_status_report_by_speno.Rmd
+  |                                                                         |                                                                 |   0%  |                                                                         |.....                                                            |   7%
+   inline R code fragments
+
+  |                                                                         |.........                                                        |  14%
+label: setup (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |..............                                                   |  21%
+  ordinary text without R code
+
+  |                                                                         |...................                                              |  29%
+label: load-packages (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |.......................                                          |  36%
+  ordinary text without R code
+
+  |                                                                         |............................                                     |  43%
+label: get-data (with options) 
+List of 1
+ $ include: logi FALSE
+
+Error in file(file, "rt") : invalid 'description' argument
+  |                                                                         |................................                                 |  50%
+   inline R code fragments
+
+  |                                                                         |.....................................                            |  57%
+label: leaflet-map (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                         |..........................................                       |  64%
+  ordinary text without R code
+
+  |                                                                         |..............................................                   |  71%
+label: haul-out-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |...................................................              |  79%
+  ordinary text without R code
+
+  |                                                                         |........................................................         |  86%
+label: dive-behav-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 6
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |............................................................     |  93%
+  ordinary text without R code
+
+  |                                                                         |.................................................................| 100%
+label: msg-tx-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+
+output file: aleutpv2016_status_report_by_speno.knit.md
+
+/usr/local/bin/pandoc +RTS -K512m -RTS aleutpv2016_status_report_by_speno.utf8.md --to html --from markdown+autolink_bare_uris+ascii_identifiers+tex_math_single_backslash --output www-aleutpv-2016//reports//PV2016_3031_status_report.html --smart --email-obfuscation none --self-contained '--variable=agency-logo:/Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/noaa-fisheries-rgb-stacked.png' --standalone --section-divs --template /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/template.html --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/uswds-0.11.0/css/uswds.min.css --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/styles.css --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/rmarkdown-strc60f2d1070b1.html --mathjax --variable 'mathjax-url:https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --no-highlight --variable highlightjs=/Users/josh.london/Library/R/3.3/library/rmarkdown/rmd/h/highlight --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/usweb_includes.html 
+
+Output created: www-aleutpv-2016//reports//PV2016_3031_status_report.html
+
+
+processing file: aleutpv2016_status_report_by_speno.Rmd
+  |                                                                         |                                                                 |   0%  |                                                                         |.....                                                            |   7%
+   inline R code fragments
+
+  |                                                                         |.........                                                        |  14%
+label: setup (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |..............                                                   |  21%
+  ordinary text without R code
+
+  |                                                                         |...................                                              |  29%
+label: load-packages (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |.......................                                          |  36%
+  ordinary text without R code
+
+  |                                                                         |............................                                     |  43%
+label: get-data (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |................................                                 |  50%
+   inline R code fragments
+
+  |                                                                         |.....................................                            |  57%
+label: leaflet-map (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                         |..........................................                       |  64%
+  ordinary text without R code
+
+  |                                                                         |..............................................                   |  71%
+label: haul-out-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |...................................................              |  79%
+  ordinary text without R code
+
+  |                                                                         |........................................................         |  86%
+label: dive-behav-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 6
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |............................................................     |  93%
+  ordinary text without R code
+
+  |                                                                         |.................................................................| 100%
+label: msg-tx-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+
+output file: aleutpv2016_status_report_by_speno.knit.md
+
+/usr/local/bin/pandoc +RTS -K512m -RTS aleutpv2016_status_report_by_speno.utf8.md --to html --from markdown+autolink_bare_uris+ascii_identifiers+tex_math_single_backslash --output www-aleutpv-2016//reports//PV2016_3032_status_report.html --smart --email-obfuscation none --self-contained '--variable=agency-logo:/Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/noaa-fisheries-rgb-stacked.png' --standalone --section-divs --template /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/template.html --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/uswds-0.11.0/css/uswds.min.css --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/styles.css --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/rmarkdown-strc60f306122de.html --mathjax --variable 'mathjax-url:https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --no-highlight --variable highlightjs=/Users/josh.london/Library/R/3.3/library/rmarkdown/rmd/h/highlight --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/usweb_includes.html 
+
+Output created: www-aleutpv-2016//reports//PV2016_3032_status_report.html
+
+
+processing file: aleutpv2016_status_report_by_speno.Rmd
+  |                                                                         |                                                                 |   0%  |                                                                         |.....                                                            |   7%
+   inline R code fragments
+
+  |                                                                         |.........                                                        |  14%
+label: setup (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |..............                                                   |  21%
+  ordinary text without R code
+
+  |                                                                         |...................                                              |  29%
+label: load-packages (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |.......................                                          |  36%
+  ordinary text without R code
+
+  |                                                                         |............................                                     |  43%
+label: get-data (with options) 
+List of 1
+ $ include: logi FALSE
+
+Error in if (grepl("\n", x)) { : argument is of length zero
+  |                                                                         |................................                                 |  50%
+   inline R code fragments
+
+  |                                                                         |.....................................                            |  57%
+label: leaflet-map (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                         |..........................................                       |  64%
+  ordinary text without R code
+
+  |                                                                         |..............................................                   |  71%
+label: haul-out-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |...................................................              |  79%
+  ordinary text without R code
+
+  |                                                                         |........................................................         |  86%
+label: dive-behav-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 6
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |............................................................     |  93%
+  ordinary text without R code
+
+  |                                                                         |.................................................................| 100%
+label: msg-tx-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+
+output file: aleutpv2016_status_report_by_speno.knit.md
+
+/usr/local/bin/pandoc +RTS -K512m -RTS aleutpv2016_status_report_by_speno.utf8.md --to html --from markdown+autolink_bare_uris+ascii_identifiers+tex_math_single_backslash --output www-aleutpv-2016//reports//PV2016_3033_status_report.html --smart --email-obfuscation none --self-contained '--variable=agency-logo:/Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/noaa-fisheries-rgb-stacked.png' --standalone --section-divs --template /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/template.html --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/uswds-0.11.0/css/uswds.min.css --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/styles.css --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/rmarkdown-strc60f68d4c648.html --mathjax --variable 'mathjax-url:https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --no-highlight --variable highlightjs=/Users/josh.london/Library/R/3.3/library/rmarkdown/rmd/h/highlight --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/usweb_includes.html 
+
+Output created: www-aleutpv-2016//reports//PV2016_3033_status_report.html
+
+
+processing file: aleutpv2016_status_report_by_speno.Rmd
+  |                                                                         |                                                                 |   0%  |                                                                         |.....                                                            |   7%
+   inline R code fragments
+
+  |                                                                         |.........                                                        |  14%
+label: setup (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |..............                                                   |  21%
+  ordinary text without R code
+
+  |                                                                         |...................                                              |  29%
+label: load-packages (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |.......................                                          |  36%
+  ordinary text without R code
+
+  |                                                                         |............................                                     |  43%
+label: get-data (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |................................                                 |  50%
+   inline R code fragments
+
+  |                                                                         |.....................................                            |  57%
+label: leaflet-map (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                         |..........................................                       |  64%
+  ordinary text without R code
+
+  |                                                                         |..............................................                   |  71%
+label: haul-out-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |...................................................              |  79%
+  ordinary text without R code
+
+  |                                                                         |........................................................         |  86%
+label: dive-behav-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 6
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |............................................................     |  93%
+  ordinary text without R code
+
+  |                                                                         |.................................................................| 100%
+label: msg-tx-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+
+output file: aleutpv2016_status_report_by_speno.knit.md
+
+/usr/local/bin/pandoc +RTS -K512m -RTS aleutpv2016_status_report_by_speno.utf8.md --to html --from markdown+autolink_bare_uris+ascii_identifiers+tex_math_single_backslash --output www-aleutpv-2016//reports//PV2016_3001_status_report.html --smart --email-obfuscation none --self-contained '--variable=agency-logo:/Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/noaa-fisheries-rgb-stacked.png' --standalone --section-divs --template /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/template.html --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/uswds-0.11.0/css/uswds.min.css --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/styles.css --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/rmarkdown-strc60f20cbe7cd.html --mathjax --variable 'mathjax-url:https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --no-highlight --variable highlightjs=/Users/josh.london/Library/R/3.3/library/rmarkdown/rmd/h/highlight --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/usweb_includes.html 
+
+Output created: www-aleutpv-2016//reports//PV2016_3001_status_report.html
+
+
+processing file: aleutpv2016_status_report_by_speno.Rmd
+  |                                                                         |                                                                 |   0%  |                                                                         |.....                                                            |   7%
+   inline R code fragments
+
+  |                                                                         |.........                                                        |  14%
+label: setup (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |..............                                                   |  21%
+  ordinary text without R code
+
+  |                                                                         |...................                                              |  29%
+label: load-packages (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |.......................                                          |  36%
+  ordinary text without R code
+
+  |                                                                         |............................                                     |  43%
+label: get-data (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |................................                                 |  50%
+   inline R code fragments
+
+  |                                                                         |.....................................                            |  57%
+label: leaflet-map (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                         |..........................................                       |  64%
+  ordinary text without R code
+
+  |                                                                         |..............................................                   |  71%
+label: haul-out-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |...................................................              |  79%
+  ordinary text without R code
+
+  |                                                                         |........................................................         |  86%
+label: dive-behav-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 6
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |............................................................     |  93%
+  ordinary text without R code
+
+  |                                                                         |.................................................................| 100%
+label: msg-tx-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+
+output file: aleutpv2016_status_report_by_speno.knit.md
+
+/usr/local/bin/pandoc +RTS -K512m -RTS aleutpv2016_status_report_by_speno.utf8.md --to html --from markdown+autolink_bare_uris+ascii_identifiers+tex_math_single_backslash --output www-aleutpv-2016//reports//PV2016_3002_status_report.html --smart --email-obfuscation none --self-contained '--variable=agency-logo:/Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/noaa-fisheries-rgb-stacked.png' --standalone --section-divs --template /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/template.html --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/uswds-0.11.0/css/uswds.min.css --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/styles.css --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/rmarkdown-strc60f3ee2a4eb.html --mathjax --variable 'mathjax-url:https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --no-highlight --variable highlightjs=/Users/josh.london/Library/R/3.3/library/rmarkdown/rmd/h/highlight --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/usweb_includes.html 
+
+Output created: www-aleutpv-2016//reports//PV2016_3002_status_report.html
+
+
+processing file: aleutpv2016_status_report_by_speno.Rmd
+  |                                                                         |                                                                 |   0%  |                                                                         |.....                                                            |   7%
+   inline R code fragments
+
+  |                                                                         |.........                                                        |  14%
+label: setup (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |..............                                                   |  21%
+  ordinary text without R code
+
+  |                                                                         |...................                                              |  29%
+label: load-packages (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |.......................                                          |  36%
+  ordinary text without R code
+
+  |                                                                         |............................                                     |  43%
+label: get-data (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |................................                                 |  50%
+   inline R code fragments
+
+  |                                                                         |.....................................                            |  57%
+label: leaflet-map (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                         |..........................................                       |  64%
+  ordinary text without R code
+
+  |                                                                         |..............................................                   |  71%
+label: haul-out-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |...................................................              |  79%
+  ordinary text without R code
+
+  |                                                                         |........................................................         |  86%
+label: dive-behav-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 6
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |............................................................     |  93%
+  ordinary text without R code
+
+  |                                                                         |.................................................................| 100%
+label: msg-tx-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+
+output file: aleutpv2016_status_report_by_speno.knit.md
+
+/usr/local/bin/pandoc +RTS -K512m -RTS aleutpv2016_status_report_by_speno.utf8.md --to html --from markdown+autolink_bare_uris+ascii_identifiers+tex_math_single_backslash --output www-aleutpv-2016//reports//PV2016_3003_status_report.html --smart --email-obfuscation none --self-contained '--variable=agency-logo:/Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/noaa-fisheries-rgb-stacked.png' --standalone --section-divs --template /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/template.html --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/uswds-0.11.0/css/uswds.min.css --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/styles.css --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/rmarkdown-strc60f54c8aea4.html --mathjax --variable 'mathjax-url:https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --no-highlight --variable highlightjs=/Users/josh.london/Library/R/3.3/library/rmarkdown/rmd/h/highlight --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/usweb_includes.html 
+
+Output created: www-aleutpv-2016//reports//PV2016_3003_status_report.html
+
+
+processing file: aleutpv2016_status_report_by_speno.Rmd
+  |                                                                         |                                                                 |   0%  |                                                                         |.....                                                            |   7%
+   inline R code fragments
+
+  |                                                                         |.........                                                        |  14%
+label: setup (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |..............                                                   |  21%
+  ordinary text without R code
+
+  |                                                                         |...................                                              |  29%
+label: load-packages (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |.......................                                          |  36%
+  ordinary text without R code
+
+  |                                                                         |............................                                     |  43%
+label: get-data (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |................................                                 |  50%
+   inline R code fragments
+
+  |                                                                         |.....................................                            |  57%
+label: leaflet-map (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                         |..........................................                       |  64%
+  ordinary text without R code
+
+  |                                                                         |..............................................                   |  71%
+label: haul-out-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |...................................................              |  79%
+  ordinary text without R code
+
+  |                                                                         |........................................................         |  86%
+label: dive-behav-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 6
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |............................................................     |  93%
+  ordinary text without R code
+
+  |                                                                         |.................................................................| 100%
+label: msg-tx-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+
+output file: aleutpv2016_status_report_by_speno.knit.md
+
+/usr/local/bin/pandoc +RTS -K512m -RTS aleutpv2016_status_report_by_speno.utf8.md --to html --from markdown+autolink_bare_uris+ascii_identifiers+tex_math_single_backslash --output www-aleutpv-2016//reports//PV2016_3004_status_report.html --smart --email-obfuscation none --self-contained '--variable=agency-logo:/Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/noaa-fisheries-rgb-stacked.png' --standalone --section-divs --template /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/template.html --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/uswds-0.11.0/css/uswds.min.css --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/styles.css --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/rmarkdown-strc60f136aa4eb.html --mathjax --variable 'mathjax-url:https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --no-highlight --variable highlightjs=/Users/josh.london/Library/R/3.3/library/rmarkdown/rmd/h/highlight --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/usweb_includes.html 
+
+Output created: www-aleutpv-2016//reports//PV2016_3004_status_report.html
+
+
+processing file: aleutpv2016_status_report_by_speno.Rmd
+  |                                                                         |                                                                 |   0%  |                                                                         |.....                                                            |   7%
+   inline R code fragments
+
+  |                                                                         |.........                                                        |  14%
+label: setup (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |..............                                                   |  21%
+  ordinary text without R code
+
+  |                                                                         |...................                                              |  29%
+label: load-packages (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |.......................                                          |  36%
+  ordinary text without R code
+
+  |                                                                         |............................                                     |  43%
+label: get-data (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |................................                                 |  50%
+   inline R code fragments
+
+  |                                                                         |.....................................                            |  57%
+label: leaflet-map (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                         |..........................................                       |  64%
+  ordinary text without R code
+
+  |                                                                         |..............................................                   |  71%
+label: haul-out-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |...................................................              |  79%
+  ordinary text without R code
+
+  |                                                                         |........................................................         |  86%
+label: dive-behav-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 6
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |............................................................     |  93%
+  ordinary text without R code
+
+  |                                                                         |.................................................................| 100%
+label: msg-tx-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+
+output file: aleutpv2016_status_report_by_speno.knit.md
+
+/usr/local/bin/pandoc +RTS -K512m -RTS aleutpv2016_status_report_by_speno.utf8.md --to html --from markdown+autolink_bare_uris+ascii_identifiers+tex_math_single_backslash --output www-aleutpv-2016//reports//PV2016_3005_status_report.html --smart --email-obfuscation none --self-contained '--variable=agency-logo:/Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/noaa-fisheries-rgb-stacked.png' --standalone --section-divs --template /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/template.html --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/uswds-0.11.0/css/uswds.min.css --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/styles.css --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/rmarkdown-strc60f677a2dae.html --mathjax --variable 'mathjax-url:https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --no-highlight --variable highlightjs=/Users/josh.london/Library/R/3.3/library/rmarkdown/rmd/h/highlight --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/usweb_includes.html 
+
+Output created: www-aleutpv-2016//reports//PV2016_3005_status_report.html
+
+
+processing file: aleutpv2016_status_report_by_speno.Rmd
+  |                                                                         |                                                                 |   0%  |                                                                         |.....                                                            |   7%
+   inline R code fragments
+
+  |                                                                         |.........                                                        |  14%
+label: setup (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |..............                                                   |  21%
+  ordinary text without R code
+
+  |                                                                         |...................                                              |  29%
+label: load-packages (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |.......................                                          |  36%
+  ordinary text without R code
+
+  |                                                                         |............................                                     |  43%
+label: get-data (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |................................                                 |  50%
+   inline R code fragments
+
+  |                                                                         |.....................................                            |  57%
+label: leaflet-map (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                         |..........................................                       |  64%
+  ordinary text without R code
+
+  |                                                                         |..............................................                   |  71%
+label: haul-out-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |...................................................              |  79%
+  ordinary text without R code
+
+  |                                                                         |........................................................         |  86%
+label: dive-behav-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 6
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |............................................................     |  93%
+  ordinary text without R code
+
+  |                                                                         |.................................................................| 100%
+label: msg-tx-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+
+output file: aleutpv2016_status_report_by_speno.knit.md
+
+/usr/local/bin/pandoc +RTS -K512m -RTS aleutpv2016_status_report_by_speno.utf8.md --to html --from markdown+autolink_bare_uris+ascii_identifiers+tex_math_single_backslash --output www-aleutpv-2016//reports//PV2016_3007_status_report.html --smart --email-obfuscation none --self-contained '--variable=agency-logo:/Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/noaa-fisheries-rgb-stacked.png' --standalone --section-divs --template /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/template.html --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/uswds-0.11.0/css/uswds.min.css --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/styles.css --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/rmarkdown-strc60f47d8e788.html --mathjax --variable 'mathjax-url:https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --no-highlight --variable highlightjs=/Users/josh.london/Library/R/3.3/library/rmarkdown/rmd/h/highlight --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/usweb_includes.html 
+
+Output created: www-aleutpv-2016//reports//PV2016_3007_status_report.html
+
+
+processing file: aleutpv2016_status_report_by_speno.Rmd
+  |                                                                         |                                                                 |   0%  |                                                                         |.....                                                            |   7%
+   inline R code fragments
+
+  |                                                                         |.........                                                        |  14%
+label: setup (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |..............                                                   |  21%
+  ordinary text without R code
+
+  |                                                                         |...................                                              |  29%
+label: load-packages (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |.......................                                          |  36%
+  ordinary text without R code
+
+  |                                                                         |............................                                     |  43%
+label: get-data (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |................................                                 |  50%
+   inline R code fragments
+
+  |                                                                         |.....................................                            |  57%
+label: leaflet-map (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                         |..........................................                       |  64%
+  ordinary text without R code
+
+  |                                                                         |..............................................                   |  71%
+label: haul-out-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |...................................................              |  79%
+  ordinary text without R code
+
+  |                                                                         |........................................................         |  86%
+label: dive-behav-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 6
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |............................................................     |  93%
+  ordinary text without R code
+
+  |                                                                         |.................................................................| 100%
+label: msg-tx-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+
+output file: aleutpv2016_status_report_by_speno.knit.md
+
+/usr/local/bin/pandoc +RTS -K512m -RTS aleutpv2016_status_report_by_speno.utf8.md --to html --from markdown+autolink_bare_uris+ascii_identifiers+tex_math_single_backslash --output www-aleutpv-2016//reports//PV2016_3008_status_report.html --smart --email-obfuscation none --self-contained '--variable=agency-logo:/Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/noaa-fisheries-rgb-stacked.png' --standalone --section-divs --template /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/template.html --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/uswds-0.11.0/css/uswds.min.css --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/styles.css --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/rmarkdown-strc60f4b699fbb.html --mathjax --variable 'mathjax-url:https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --no-highlight --variable highlightjs=/Users/josh.london/Library/R/3.3/library/rmarkdown/rmd/h/highlight --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/usweb_includes.html 
+
+Output created: www-aleutpv-2016//reports//PV2016_3008_status_report.html
+
+
+processing file: aleutpv2016_status_report_by_speno.Rmd
+  |                                                                         |                                                                 |   0%  |                                                                         |.....                                                            |   7%
+   inline R code fragments
+
+  |                                                                         |.........                                                        |  14%
+label: setup (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |..............                                                   |  21%
+  ordinary text without R code
+
+  |                                                                         |...................                                              |  29%
+label: load-packages (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |.......................                                          |  36%
+  ordinary text without R code
+
+  |                                                                         |............................                                     |  43%
+label: get-data (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |................................                                 |  50%
+   inline R code fragments
+
+  |                                                                         |.....................................                            |  57%
+label: leaflet-map (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                         |..........................................                       |  64%
+  ordinary text without R code
+
+  |                                                                         |..............................................                   |  71%
+label: haul-out-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |...................................................              |  79%
+  ordinary text without R code
+
+  |                                                                         |........................................................         |  86%
+label: dive-behav-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 6
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |............................................................     |  93%
+  ordinary text without R code
+
+  |                                                                         |.................................................................| 100%
+label: msg-tx-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+
+output file: aleutpv2016_status_report_by_speno.knit.md
+
+/usr/local/bin/pandoc +RTS -K512m -RTS aleutpv2016_status_report_by_speno.utf8.md --to html --from markdown+autolink_bare_uris+ascii_identifiers+tex_math_single_backslash --output www-aleutpv-2016//reports//PV2016_3009_status_report.html --smart --email-obfuscation none --self-contained '--variable=agency-logo:/Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/noaa-fisheries-rgb-stacked.png' --standalone --section-divs --template /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/template.html --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/uswds-0.11.0/css/uswds.min.css --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/styles.css --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/rmarkdown-strc60f1d4dab34.html --mathjax --variable 'mathjax-url:https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --no-highlight --variable highlightjs=/Users/josh.london/Library/R/3.3/library/rmarkdown/rmd/h/highlight --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/usweb_includes.html 
+
+Output created: www-aleutpv-2016//reports//PV2016_3009_status_report.html
+
+
+processing file: aleutpv2016_status_report_by_speno.Rmd
+  |                                                                         |                                                                 |   0%  |                                                                         |.....                                                            |   7%
+   inline R code fragments
+
+  |                                                                         |.........                                                        |  14%
+label: setup (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |..............                                                   |  21%
+  ordinary text without R code
+
+  |                                                                         |...................                                              |  29%
+label: load-packages (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |.......................                                          |  36%
+  ordinary text without R code
+
+  |                                                                         |............................                                     |  43%
+label: get-data (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |................................                                 |  50%
+   inline R code fragments
+
+  |                                                                         |.....................................                            |  57%
+label: leaflet-map (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                         |..........................................                       |  64%
+  ordinary text without R code
+
+  |                                                                         |..............................................                   |  71%
+label: haul-out-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |...................................................              |  79%
+  ordinary text without R code
+
+  |                                                                         |........................................................         |  86%
+label: dive-behav-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 6
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |............................................................     |  93%
+  ordinary text without R code
+
+  |                                                                         |.................................................................| 100%
+label: msg-tx-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+
+output file: aleutpv2016_status_report_by_speno.knit.md
+
+/usr/local/bin/pandoc +RTS -K512m -RTS aleutpv2016_status_report_by_speno.utf8.md --to html --from markdown+autolink_bare_uris+ascii_identifiers+tex_math_single_backslash --output www-aleutpv-2016//reports//PV2016_3010_status_report.html --smart --email-obfuscation none --self-contained '--variable=agency-logo:/Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/noaa-fisheries-rgb-stacked.png' --standalone --section-divs --template /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/template.html --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/uswds-0.11.0/css/uswds.min.css --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/styles.css --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/rmarkdown-strc60f147c4a15.html --mathjax --variable 'mathjax-url:https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --no-highlight --variable highlightjs=/Users/josh.london/Library/R/3.3/library/rmarkdown/rmd/h/highlight --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/usweb_includes.html 
+
+Output created: www-aleutpv-2016//reports//PV2016_3010_status_report.html
+
+
+processing file: aleutpv2016_status_report_by_speno.Rmd
+  |                                                                         |                                                                 |   0%  |                                                                         |.....                                                            |   7%
+   inline R code fragments
+
+  |                                                                         |.........                                                        |  14%
+label: setup (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |..............                                                   |  21%
+  ordinary text without R code
+
+  |                                                                         |...................                                              |  29%
+label: load-packages (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |.......................                                          |  36%
+  ordinary text without R code
+
+  |                                                                         |............................                                     |  43%
+label: get-data (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |................................                                 |  50%
+   inline R code fragments
+
+  |                                                                         |.....................................                            |  57%
+label: leaflet-map (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                         |..........................................                       |  64%
+  ordinary text without R code
+
+  |                                                                         |..............................................                   |  71%
+label: haul-out-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |...................................................              |  79%
+  ordinary text without R code
+
+  |                                                                         |........................................................         |  86%
+label: dive-behav-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 6
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |............................................................     |  93%
+  ordinary text without R code
+
+  |                                                                         |.................................................................| 100%
+label: msg-tx-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+
+output file: aleutpv2016_status_report_by_speno.knit.md
+
+/usr/local/bin/pandoc +RTS -K512m -RTS aleutpv2016_status_report_by_speno.utf8.md --to html --from markdown+autolink_bare_uris+ascii_identifiers+tex_math_single_backslash --output www-aleutpv-2016//reports//PV2016_3013_status_report.html --smart --email-obfuscation none --self-contained '--variable=agency-logo:/Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/noaa-fisheries-rgb-stacked.png' --standalone --section-divs --template /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/template.html --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/uswds-0.11.0/css/uswds.min.css --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/styles.css --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/rmarkdown-strc60f3f0df581.html --mathjax --variable 'mathjax-url:https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --no-highlight --variable highlightjs=/Users/josh.london/Library/R/3.3/library/rmarkdown/rmd/h/highlight --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/usweb_includes.html 
+
+Output created: www-aleutpv-2016//reports//PV2016_3013_status_report.html
+
+
+processing file: aleutpv2016_status_report_by_speno.Rmd
+  |                                                                         |                                                                 |   0%  |                                                                         |.....                                                            |   7%
+   inline R code fragments
+
+  |                                                                         |.........                                                        |  14%
+label: setup (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |..............                                                   |  21%
+  ordinary text without R code
+
+  |                                                                         |...................                                              |  29%
+label: load-packages (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |.......................                                          |  36%
+  ordinary text without R code
+
+  |                                                                         |............................                                     |  43%
+label: get-data (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |................................                                 |  50%
+   inline R code fragments
+
+  |                                                                         |.....................................                            |  57%
+label: leaflet-map (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                         |..........................................                       |  64%
+  ordinary text without R code
+
+  |                                                                         |..............................................                   |  71%
+label: haul-out-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |...................................................              |  79%
+  ordinary text without R code
+
+  |                                                                         |........................................................         |  86%
+label: dive-behav-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 6
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |............................................................     |  93%
+  ordinary text without R code
+
+  |                                                                         |.................................................................| 100%
+label: msg-tx-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+
+output file: aleutpv2016_status_report_by_speno.knit.md
+
+/usr/local/bin/pandoc +RTS -K512m -RTS aleutpv2016_status_report_by_speno.utf8.md --to html --from markdown+autolink_bare_uris+ascii_identifiers+tex_math_single_backslash --output www-aleutpv-2016//reports//PV2016_3014_status_report.html --smart --email-obfuscation none --self-contained '--variable=agency-logo:/Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/noaa-fisheries-rgb-stacked.png' --standalone --section-divs --template /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/template.html --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/uswds-0.11.0/css/uswds.min.css --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/styles.css --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/rmarkdown-strc60f795133de.html --mathjax --variable 'mathjax-url:https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --no-highlight --variable highlightjs=/Users/josh.london/Library/R/3.3/library/rmarkdown/rmd/h/highlight --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/usweb_includes.html 
+
+Output created: www-aleutpv-2016//reports//PV2016_3014_status_report.html
+
+
+processing file: aleutpv2016_status_report_by_speno.Rmd
+  |                                                                         |                                                                 |   0%  |                                                                         |.....                                                            |   7%
+   inline R code fragments
+
+  |                                                                         |.........                                                        |  14%
+label: setup (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |..............                                                   |  21%
+  ordinary text without R code
+
+  |                                                                         |...................                                              |  29%
+label: load-packages (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |.......................                                          |  36%
+  ordinary text without R code
+
+  |                                                                         |............................                                     |  43%
+label: get-data (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |................................                                 |  50%
+   inline R code fragments
+
+  |                                                                         |.....................................                            |  57%
+label: leaflet-map (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                         |..........................................                       |  64%
+  ordinary text without R code
+
+  |                                                                         |..............................................                   |  71%
+label: haul-out-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |...................................................              |  79%
+  ordinary text without R code
+
+  |                                                                         |........................................................         |  86%
+label: dive-behav-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 6
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |............................................................     |  93%
+  ordinary text without R code
+
+  |                                                                         |.................................................................| 100%
+label: msg-tx-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+
+output file: aleutpv2016_status_report_by_speno.knit.md
+
+/usr/local/bin/pandoc +RTS -K512m -RTS aleutpv2016_status_report_by_speno.utf8.md --to html --from markdown+autolink_bare_uris+ascii_identifiers+tex_math_single_backslash --output www-aleutpv-2016//reports//PV2016_3015_status_report.html --smart --email-obfuscation none --self-contained '--variable=agency-logo:/Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/noaa-fisheries-rgb-stacked.png' --standalone --section-divs --template /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/template.html --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/uswds-0.11.0/css/uswds.min.css --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/styles.css --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/rmarkdown-strc60f6ee86a85.html --mathjax --variable 'mathjax-url:https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --no-highlight --variable highlightjs=/Users/josh.london/Library/R/3.3/library/rmarkdown/rmd/h/highlight --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/usweb_includes.html 
+
+Output created: www-aleutpv-2016//reports//PV2016_3015_status_report.html
+
+
+processing file: aleutpv2016_status_report_by_speno.Rmd
+  |                                                                         |                                                                 |   0%  |                                                                         |.....                                                            |   7%
+   inline R code fragments
+
+  |                                                                         |.........                                                        |  14%
+label: setup (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |..............                                                   |  21%
+  ordinary text without R code
+
+  |                                                                         |...................                                              |  29%
+label: load-packages (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |.......................                                          |  36%
+  ordinary text without R code
+
+  |                                                                         |............................                                     |  43%
+label: get-data (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |................................                                 |  50%
+   inline R code fragments
+
+  |                                                                         |.....................................                            |  57%
+label: leaflet-map (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                         |..........................................                       |  64%
+  ordinary text without R code
+
+  |                                                                         |..............................................                   |  71%
+label: haul-out-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |...................................................              |  79%
+  ordinary text without R code
+
+  |                                                                         |........................................................         |  86%
+label: dive-behav-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 6
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |............................................................     |  93%
+  ordinary text without R code
+
+  |                                                                         |.................................................................| 100%
+label: msg-tx-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+
+output file: aleutpv2016_status_report_by_speno.knit.md
+
+/usr/local/bin/pandoc +RTS -K512m -RTS aleutpv2016_status_report_by_speno.utf8.md --to html --from markdown+autolink_bare_uris+ascii_identifiers+tex_math_single_backslash --output www-aleutpv-2016//reports//PV2016_3017_status_report.html --smart --email-obfuscation none --self-contained '--variable=agency-logo:/Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/noaa-fisheries-rgb-stacked.png' --standalone --section-divs --template /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/template.html --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/uswds-0.11.0/css/uswds.min.css --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/styles.css --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/rmarkdown-strc60f79895c5.html --mathjax --variable 'mathjax-url:https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --no-highlight --variable highlightjs=/Users/josh.london/Library/R/3.3/library/rmarkdown/rmd/h/highlight --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/usweb_includes.html 
+
+Output created: www-aleutpv-2016//reports//PV2016_3017_status_report.html
+
+
+processing file: aleutpv2016_status_report_by_speno.Rmd
+  |                                                                         |                                                                 |   0%  |                                                                         |.....                                                            |   7%
+   inline R code fragments
+
+  |                                                                         |.........                                                        |  14%
+label: setup (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |..............                                                   |  21%
+  ordinary text without R code
+
+  |                                                                         |...................                                              |  29%
+label: load-packages (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |.......................                                          |  36%
+  ordinary text without R code
+
+  |                                                                         |............................                                     |  43%
+label: get-data (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |................................                                 |  50%
+   inline R code fragments
+
+  |                                                                         |.....................................                            |  57%
+label: leaflet-map (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                         |..........................................                       |  64%
+  ordinary text without R code
+
+  |                                                                         |..............................................                   |  71%
+label: haul-out-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |...................................................              |  79%
+  ordinary text without R code
+
+  |                                                                         |........................................................         |  86%
+label: dive-behav-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 6
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |............................................................     |  93%
+  ordinary text without R code
+
+  |                                                                         |.................................................................| 100%
+label: msg-tx-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+
+output file: aleutpv2016_status_report_by_speno.knit.md
+
+/usr/local/bin/pandoc +RTS -K512m -RTS aleutpv2016_status_report_by_speno.utf8.md --to html --from markdown+autolink_bare_uris+ascii_identifiers+tex_math_single_backslash --output www-aleutpv-2016//reports//PV2016_3018_status_report.html --smart --email-obfuscation none --self-contained '--variable=agency-logo:/Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/noaa-fisheries-rgb-stacked.png' --standalone --section-divs --template /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/template.html --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/uswds-0.11.0/css/uswds.min.css --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/styles.css --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/rmarkdown-strc60f6545e8af.html --mathjax --variable 'mathjax-url:https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --no-highlight --variable highlightjs=/Users/josh.london/Library/R/3.3/library/rmarkdown/rmd/h/highlight --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/usweb_includes.html 
+
+Output created: www-aleutpv-2016//reports//PV2016_3018_status_report.html
+
+
+processing file: aleutpv2016_status_report_by_speno.Rmd
+  |                                                                         |                                                                 |   0%  |                                                                         |.....                                                            |   7%
+   inline R code fragments
+
+  |                                                                         |.........                                                        |  14%
+label: setup (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |..............                                                   |  21%
+  ordinary text without R code
+
+  |                                                                         |...................                                              |  29%
+label: load-packages (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |.......................                                          |  36%
+  ordinary text without R code
+
+  |                                                                         |............................                                     |  43%
+label: get-data (with options) 
+List of 1
+ $ include: logi FALSE
+
+Error in if (grepl("\n", x)) { : argument is of length zero
+  |                                                                         |................................                                 |  50%
+   inline R code fragments
+
+  |                                                                         |.....................................                            |  57%
+label: leaflet-map (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                         |..........................................                       |  64%
+  ordinary text without R code
+
+  |                                                                         |..............................................                   |  71%
+label: haul-out-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |...................................................              |  79%
+  ordinary text without R code
+
+  |                                                                         |........................................................         |  86%
+label: dive-behav-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 6
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |............................................................     |  93%
+  ordinary text without R code
+
+  |                                                                         |.................................................................| 100%
+label: msg-tx-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+
+output file: aleutpv2016_status_report_by_speno.knit.md
+
+/usr/local/bin/pandoc +RTS -K512m -RTS aleutpv2016_status_report_by_speno.utf8.md --to html --from markdown+autolink_bare_uris+ascii_identifiers+tex_math_single_backslash --output www-aleutpv-2016//reports//PV2016_3020_status_report.html --smart --email-obfuscation none --self-contained '--variable=agency-logo:/Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/noaa-fisheries-rgb-stacked.png' --standalone --section-divs --template /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/template.html --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/uswds-0.11.0/css/uswds.min.css --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/styles.css --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/rmarkdown-strc60f72291707.html --mathjax --variable 'mathjax-url:https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --no-highlight --variable highlightjs=/Users/josh.london/Library/R/3.3/library/rmarkdown/rmd/h/highlight --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/usweb_includes.html 
+
+Output created: www-aleutpv-2016//reports//PV2016_3020_status_report.html
+
+
+processing file: aleutpv2016_status_report_by_speno.Rmd
+  |                                                                         |                                                                 |   0%  |                                                                         |.....                                                            |   7%
+   inline R code fragments
+
+  |                                                                         |.........                                                        |  14%
+label: setup (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |..............                                                   |  21%
+  ordinary text without R code
+
+  |                                                                         |...................                                              |  29%
+label: load-packages (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |.......................                                          |  36%
+  ordinary text without R code
+
+  |                                                                         |............................                                     |  43%
+label: get-data (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |................................                                 |  50%
+   inline R code fragments
+
+  |                                                                         |.....................................                            |  57%
+label: leaflet-map (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                         |..........................................                       |  64%
+  ordinary text without R code
+
+  |                                                                         |..............................................                   |  71%
+label: haul-out-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |...................................................              |  79%
+  ordinary text without R code
+
+  |                                                                         |........................................................         |  86%
+label: dive-behav-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 6
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |............................................................     |  93%
+  ordinary text without R code
+
+  |                                                                         |.................................................................| 100%
+label: msg-tx-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+
+output file: aleutpv2016_status_report_by_speno.knit.md
+
+/usr/local/bin/pandoc +RTS -K512m -RTS aleutpv2016_status_report_by_speno.utf8.md --to html --from markdown+autolink_bare_uris+ascii_identifiers+tex_math_single_backslash --output www-aleutpv-2016//reports//PV2016_3021_status_report.html --smart --email-obfuscation none --self-contained '--variable=agency-logo:/Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/noaa-fisheries-rgb-stacked.png' --standalone --section-divs --template /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/template.html --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/uswds-0.11.0/css/uswds.min.css --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/styles.css --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/rmarkdown-strc60f7f6b6d1a.html --mathjax --variable 'mathjax-url:https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --no-highlight --variable highlightjs=/Users/josh.london/Library/R/3.3/library/rmarkdown/rmd/h/highlight --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/usweb_includes.html 
+
+Output created: www-aleutpv-2016//reports//PV2016_3021_status_report.html
+
+
+processing file: aleutpv2016_status_report_by_speno.Rmd
+  |                                                                         |                                                                 |   0%  |                                                                         |.....                                                            |   7%
+   inline R code fragments
+
+  |                                                                         |.........                                                        |  14%
+label: setup (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |..............                                                   |  21%
+  ordinary text without R code
+
+  |                                                                         |...................                                              |  29%
+label: load-packages (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |.......................                                          |  36%
+  ordinary text without R code
+
+  |                                                                         |............................                                     |  43%
+label: get-data (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |................................                                 |  50%
+   inline R code fragments
+
+  |                                                                         |.....................................                            |  57%
+label: leaflet-map (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                         |..........................................                       |  64%
+  ordinary text without R code
+
+  |                                                                         |..............................................                   |  71%
+label: haul-out-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |...................................................              |  79%
+  ordinary text without R code
+
+  |                                                                         |........................................................         |  86%
+label: dive-behav-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 6
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |............................................................     |  93%
+  ordinary text without R code
+
+  |                                                                         |.................................................................| 100%
+label: msg-tx-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+
+output file: aleutpv2016_status_report_by_speno.knit.md
+
+/usr/local/bin/pandoc +RTS -K512m -RTS aleutpv2016_status_report_by_speno.utf8.md --to html --from markdown+autolink_bare_uris+ascii_identifiers+tex_math_single_backslash --output www-aleutpv-2016//reports//PV2016_3023_status_report.html --smart --email-obfuscation none --self-contained '--variable=agency-logo:/Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/noaa-fisheries-rgb-stacked.png' --standalone --section-divs --template /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/template.html --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/uswds-0.11.0/css/uswds.min.css --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/styles.css --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/rmarkdown-strc60f5a8c5c65.html --mathjax --variable 'mathjax-url:https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --no-highlight --variable highlightjs=/Users/josh.london/Library/R/3.3/library/rmarkdown/rmd/h/highlight --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/usweb_includes.html 
+
+Output created: www-aleutpv-2016//reports//PV2016_3023_status_report.html
+
+
+processing file: aleutpv2016_status_report_by_speno.Rmd
+  |                                                                         |                                                                 |   0%  |                                                                         |.....                                                            |   7%
+   inline R code fragments
+
+  |                                                                         |.........                                                        |  14%
+label: setup (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |..............                                                   |  21%
+  ordinary text without R code
+
+  |                                                                         |...................                                              |  29%
+label: load-packages (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |.......................                                          |  36%
+  ordinary text without R code
+
+  |                                                                         |............................                                     |  43%
+label: get-data (with options) 
+List of 1
+ $ include: logi FALSE
+
+Error in if (grepl("\n", x)) { : argument is of length zero
+  |                                                                         |................................                                 |  50%
+   inline R code fragments
+
+  |                                                                         |.....................................                            |  57%
+label: leaflet-map (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                         |..........................................                       |  64%
+  ordinary text without R code
+
+  |                                                                         |..............................................                   |  71%
+label: haul-out-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |...................................................              |  79%
+  ordinary text without R code
+
+  |                                                                         |........................................................         |  86%
+label: dive-behav-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 6
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |............................................................     |  93%
+  ordinary text without R code
+
+  |                                                                         |.................................................................| 100%
+label: msg-tx-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+
+output file: aleutpv2016_status_report_by_speno.knit.md
+
+/usr/local/bin/pandoc +RTS -K512m -RTS aleutpv2016_status_report_by_speno.utf8.md --to html --from markdown+autolink_bare_uris+ascii_identifiers+tex_math_single_backslash --output www-aleutpv-2016//reports//PV2016_3024_status_report.html --smart --email-obfuscation none --self-contained '--variable=agency-logo:/Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/noaa-fisheries-rgb-stacked.png' --standalone --section-divs --template /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/template.html --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/uswds-0.11.0/css/uswds.min.css --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/styles.css --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/rmarkdown-strc60f609ef746.html --mathjax --variable 'mathjax-url:https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --no-highlight --variable highlightjs=/Users/josh.london/Library/R/3.3/library/rmarkdown/rmd/h/highlight --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/usweb_includes.html 
+
+Output created: www-aleutpv-2016//reports//PV2016_3024_status_report.html
+
+
+processing file: aleutpv2016_status_report_by_speno.Rmd
+  |                                                                         |                                                                 |   0%  |                                                                         |.....                                                            |   7%
+   inline R code fragments
+
+  |                                                                         |.........                                                        |  14%
+label: setup (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |..............                                                   |  21%
+  ordinary text without R code
+
+  |                                                                         |...................                                              |  29%
+label: load-packages (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |.......................                                          |  36%
+  ordinary text without R code
+
+  |                                                                         |............................                                     |  43%
+label: get-data (with options) 
+List of 1
+ $ include: logi FALSE
+
+Error in if (grepl("\n", x)) { : argument is of length zero
+  |                                                                         |................................                                 |  50%
+   inline R code fragments
+
+  |                                                                         |.....................................                            |  57%
+label: leaflet-map (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                         |..........................................                       |  64%
+  ordinary text without R code
+
+  |                                                                         |..............................................                   |  71%
+label: haul-out-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |...................................................              |  79%
+  ordinary text without R code
+
+  |                                                                         |........................................................         |  86%
+label: dive-behav-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 6
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |............................................................     |  93%
+  ordinary text without R code
+
+  |                                                                         |.................................................................| 100%
+label: msg-tx-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+
+output file: aleutpv2016_status_report_by_speno.knit.md
+
+/usr/local/bin/pandoc +RTS -K512m -RTS aleutpv2016_status_report_by_speno.utf8.md --to html --from markdown+autolink_bare_uris+ascii_identifiers+tex_math_single_backslash --output www-aleutpv-2016//reports//PV2016_3025_status_report.html --smart --email-obfuscation none --self-contained '--variable=agency-logo:/Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/noaa-fisheries-rgb-stacked.png' --standalone --section-divs --template /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/template.html --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/uswds-0.11.0/css/uswds.min.css --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/styles.css --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/rmarkdown-strc60f7b72bc2a.html --mathjax --variable 'mathjax-url:https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --no-highlight --variable highlightjs=/Users/josh.london/Library/R/3.3/library/rmarkdown/rmd/h/highlight --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/usweb_includes.html 
+
+Output created: www-aleutpv-2016//reports//PV2016_3025_status_report.html
+
+
+processing file: aleutpv2016_status_report_by_speno.Rmd
+  |                                                                         |                                                                 |   0%  |                                                                         |.....                                                            |   7%
+   inline R code fragments
+
+  |                                                                         |.........                                                        |  14%
+label: setup (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |..............                                                   |  21%
+  ordinary text without R code
+
+  |                                                                         |...................                                              |  29%
+label: load-packages (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |.......................                                          |  36%
+  ordinary text without R code
+
+  |                                                                         |............................                                     |  43%
+label: get-data (with options) 
+List of 1
+ $ include: logi FALSE
+
+Error in if (grepl("\n", x)) { : argument is of length zero
+  |                                                                         |................................                                 |  50%
+   inline R code fragments
+
+  |                                                                         |.....................................                            |  57%
+label: leaflet-map (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                         |..........................................                       |  64%
+  ordinary text without R code
+
+  |                                                                         |..............................................                   |  71%
+label: haul-out-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |...................................................              |  79%
+  ordinary text without R code
+
+  |                                                                         |........................................................         |  86%
+label: dive-behav-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 6
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |............................................................     |  93%
+  ordinary text without R code
+
+  |                                                                         |.................................................................| 100%
+label: msg-tx-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+
+output file: aleutpv2016_status_report_by_speno.knit.md
+
+/usr/local/bin/pandoc +RTS -K512m -RTS aleutpv2016_status_report_by_speno.utf8.md --to html --from markdown+autolink_bare_uris+ascii_identifiers+tex_math_single_backslash --output www-aleutpv-2016//reports//PV2016_3026_status_report.html --smart --email-obfuscation none --self-contained '--variable=agency-logo:/Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/noaa-fisheries-rgb-stacked.png' --standalone --section-divs --template /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/template.html --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/uswds-0.11.0/css/uswds.min.css --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/styles.css --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/rmarkdown-strc60f50452f35.html --mathjax --variable 'mathjax-url:https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --no-highlight --variable highlightjs=/Users/josh.london/Library/R/3.3/library/rmarkdown/rmd/h/highlight --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/usweb_includes.html 
+
+Output created: www-aleutpv-2016//reports//PV2016_3026_status_report.html
+
+
+processing file: aleutpv2016_status_report_by_speno.Rmd
+  |                                                                         |                                                                 |   0%  |                                                                         |.....                                                            |   7%
+   inline R code fragments
+
+  |                                                                         |.........                                                        |  14%
+label: setup (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |..............                                                   |  21%
+  ordinary text without R code
+
+  |                                                                         |...................                                              |  29%
+label: load-packages (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |.......................                                          |  36%
+  ordinary text without R code
+
+  |                                                                         |............................                                     |  43%
+label: get-data (with options) 
+List of 1
+ $ include: logi FALSE
+
+Error in if (grepl("\n", x)) { : argument is of length zero
+  |                                                                         |................................                                 |  50%
+   inline R code fragments
+
+  |                                                                         |.....................................                            |  57%
+label: leaflet-map (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                         |..........................................                       |  64%
+  ordinary text without R code
+
+  |                                                                         |..............................................                   |  71%
+label: haul-out-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |...................................................              |  79%
+  ordinary text without R code
+
+  |                                                                         |........................................................         |  86%
+label: dive-behav-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 6
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |............................................................     |  93%
+  ordinary text without R code
+
+  |                                                                         |.................................................................| 100%
+label: msg-tx-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+
+output file: aleutpv2016_status_report_by_speno.knit.md
+
+/usr/local/bin/pandoc +RTS -K512m -RTS aleutpv2016_status_report_by_speno.utf8.md --to html --from markdown+autolink_bare_uris+ascii_identifiers+tex_math_single_backslash --output www-aleutpv-2016//reports//PV2016_3028_status_report.html --smart --email-obfuscation none --self-contained '--variable=agency-logo:/Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/noaa-fisheries-rgb-stacked.png' --standalone --section-divs --template /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/template.html --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/uswds-0.11.0/css/uswds.min.css --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/styles.css --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/rmarkdown-strc60f4d987187.html --mathjax --variable 'mathjax-url:https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --no-highlight --variable highlightjs=/Users/josh.london/Library/R/3.3/library/rmarkdown/rmd/h/highlight --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/usweb_includes.html 
+
+Output created: www-aleutpv-2016//reports//PV2016_3028_status_report.html
+
+
+processing file: aleutpv2016_status_report_by_speno.Rmd
+  |                                                                         |                                                                 |   0%  |                                                                         |.....                                                            |   7%
+   inline R code fragments
+
+  |                                                                         |.........                                                        |  14%
+label: setup (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |..............                                                   |  21%
+  ordinary text without R code
+
+  |                                                                         |...................                                              |  29%
+label: load-packages (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |.......................                                          |  36%
+  ordinary text without R code
+
+  |                                                                         |............................                                     |  43%
+label: get-data (with options) 
+List of 1
+ $ include: logi FALSE
+
+Error in if (grepl("\n", x)) { : argument is of length zero
+  |                                                                         |................................                                 |  50%
+   inline R code fragments
+
+  |                                                                         |.....................................                            |  57%
+label: leaflet-map (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                         |..........................................                       |  64%
+  ordinary text without R code
+
+  |                                                                         |..............................................                   |  71%
+label: haul-out-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |...................................................              |  79%
+  ordinary text without R code
+
+  |                                                                         |........................................................         |  86%
+label: dive-behav-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 6
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |............................................................     |  93%
+  ordinary text without R code
+
+  |                                                                         |.................................................................| 100%
+label: msg-tx-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+
+output file: aleutpv2016_status_report_by_speno.knit.md
+
+/usr/local/bin/pandoc +RTS -K512m -RTS aleutpv2016_status_report_by_speno.utf8.md --to html --from markdown+autolink_bare_uris+ascii_identifiers+tex_math_single_backslash --output www-aleutpv-2016//reports//PV2016_3029_status_report.html --smart --email-obfuscation none --self-contained '--variable=agency-logo:/Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/noaa-fisheries-rgb-stacked.png' --standalone --section-divs --template /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/template.html --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/uswds-0.11.0/css/uswds.min.css --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/styles.css --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/rmarkdown-strc60f6d5577a5.html --mathjax --variable 'mathjax-url:https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --no-highlight --variable highlightjs=/Users/josh.london/Library/R/3.3/library/rmarkdown/rmd/h/highlight --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/usweb_includes.html 
+
+Output created: www-aleutpv-2016//reports//PV2016_3029_status_report.html
+
+
+processing file: aleutpv2016_status_report_by_speno.Rmd
+  |                                                                         |                                                                 |   0%  |                                                                         |.....                                                            |   7%
+   inline R code fragments
+
+  |                                                                         |.........                                                        |  14%
+label: setup (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |..............                                                   |  21%
+  ordinary text without R code
+
+  |                                                                         |...................                                              |  29%
+label: load-packages (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |.......................                                          |  36%
+  ordinary text without R code
+
+  |                                                                         |............................                                     |  43%
+label: get-data (with options) 
+List of 1
+ $ include: logi FALSE
+
+Error in if (grepl("\n", x)) { : argument is of length zero
+  |                                                                         |................................                                 |  50%
+   inline R code fragments
+
+  |                                                                         |.....................................                            |  57%
+label: leaflet-map (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                         |..........................................                       |  64%
+  ordinary text without R code
+
+  |                                                                         |..............................................                   |  71%
+label: haul-out-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |...................................................              |  79%
+  ordinary text without R code
+
+  |                                                                         |........................................................         |  86%
+label: dive-behav-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 6
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |............................................................     |  93%
+  ordinary text without R code
+
+  |                                                                         |.................................................................| 100%
+label: msg-tx-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+
+output file: aleutpv2016_status_report_by_speno.knit.md
+
+/usr/local/bin/pandoc +RTS -K512m -RTS aleutpv2016_status_report_by_speno.utf8.md --to html --from markdown+autolink_bare_uris+ascii_identifiers+tex_math_single_backslash --output www-aleutpv-2016//reports//PV2016_3030_status_report.html --smart --email-obfuscation none --self-contained '--variable=agency-logo:/Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/noaa-fisheries-rgb-stacked.png' --standalone --section-divs --template /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/template.html --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/uswds-0.11.0/css/uswds.min.css --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/styles.css --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/rmarkdown-strc60f6773a87c.html --mathjax --variable 'mathjax-url:https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --no-highlight --variable highlightjs=/Users/josh.london/Library/R/3.3/library/rmarkdown/rmd/h/highlight --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/usweb_includes.html 
+
+Output created: www-aleutpv-2016//reports//PV2016_3030_status_report.html
+
+
+processing file: aleutpv2016_status_report_by_speno.Rmd
+  |                                                                         |                                                                 |   0%  |                                                                         |.....                                                            |   7%
+   inline R code fragments
+
+  |                                                                         |.........                                                        |  14%
+label: setup (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |..............                                                   |  21%
+  ordinary text without R code
+
+  |                                                                         |...................                                              |  29%
+label: load-packages (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |.......................                                          |  36%
+  ordinary text without R code
+
+  |                                                                         |............................                                     |  43%
+label: get-data (with options) 
+List of 1
+ $ include: logi FALSE
+
+Error in file(file, "rt") : invalid 'description' argument
+Error in if (grepl("\n", x)) { : argument is of length zero
+  |                                                                         |................................                                 |  50%
+   inline R code fragments
+
+  |                                                                         |.....................................                            |  57%
+label: leaflet-map (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                         |..........................................                       |  64%
+  ordinary text without R code
+
+  |                                                                         |..............................................                   |  71%
+label: haul-out-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |...................................................              |  79%
+  ordinary text without R code
+
+  |                                                                         |........................................................         |  86%
+label: dive-behav-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 6
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |............................................................     |  93%
+  ordinary text without R code
+
+  |                                                                         |.................................................................| 100%
+label: msg-tx-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+
+output file: aleutpv2016_status_report_by_speno.knit.md
+
+/usr/local/bin/pandoc +RTS -K512m -RTS aleutpv2016_status_report_by_speno.utf8.md --to html --from markdown+autolink_bare_uris+ascii_identifiers+tex_math_single_backslash --output www-aleutpv-2016//reports//PV2016_3034_status_report.html --smart --email-obfuscation none --self-contained '--variable=agency-logo:/Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/noaa-fisheries-rgb-stacked.png' --standalone --section-divs --template /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/template.html --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/uswds-0.11.0/css/uswds.min.css --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/styles.css --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/rmarkdown-strc60f205ec47e.html --mathjax --variable 'mathjax-url:https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --no-highlight --variable highlightjs=/Users/josh.london/Library/R/3.3/library/rmarkdown/rmd/h/highlight --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/usweb_includes.html 
+
+Output created: www-aleutpv-2016//reports//PV2016_3034_status_report.html
+
+
+processing file: aleutpv2016_status_report_by_speno.Rmd
+  |                                                                         |                                                                 |   0%  |                                                                         |.....                                                            |   7%
+   inline R code fragments
+
+  |                                                                         |.........                                                        |  14%
+label: setup (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |..............                                                   |  21%
+  ordinary text without R code
+
+  |                                                                         |...................                                              |  29%
+label: load-packages (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |.......................                                          |  36%
+  ordinary text without R code
+
+  |                                                                         |............................                                     |  43%
+label: get-data (with options) 
+List of 1
+ $ include: logi FALSE
+
+Error in if (grepl("\n", x)) { : argument is of length zero
+  |                                                                         |................................                                 |  50%
+   inline R code fragments
+
+  |                                                                         |.....................................                            |  57%
+label: leaflet-map (with options) 
+List of 1
+ $ echo: logi FALSE
+
+  |                                                                         |..........................................                       |  64%
+  ordinary text without R code
+
+  |                                                                         |..............................................                   |  71%
+label: haul-out-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |...................................................              |  79%
+  ordinary text without R code
+
+  |                                                                         |........................................................         |  86%
+label: dive-behav-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 6
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |............................................................     |  93%
+  ordinary text without R code
+
+  |                                                                         |.................................................................| 100%
+label: msg-tx-plot (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+
+output file: aleutpv2016_status_report_by_speno.knit.md
+
+/usr/local/bin/pandoc +RTS -K512m -RTS aleutpv2016_status_report_by_speno.utf8.md --to html --from markdown+autolink_bare_uris+ascii_identifiers+tex_math_single_backslash --output www-aleutpv-2016//reports//PV2016_3035_status_report.html --smart --email-obfuscation none --self-contained '--variable=agency-logo:/Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/noaa-fisheries-rgb-stacked.png' --standalone --section-divs --template /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/template.html --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/uswds-0.11.0/css/uswds.min.css --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/styles.css --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/rmarkdown-strc60f3a8b118d.html --mathjax --variable 'mathjax-url:https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --no-highlight --variable highlightjs=/Users/josh.london/Library/R/3.3/library/rmarkdown/rmd/h/highlight --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/usweb_includes.html 
+
+Output created: www-aleutpv-2016//reports//PV2016_3035_status_report.html
+> 
+> rmarkdown::render("deploy_length.Rmd", 
++                   output_file = "www-aleutpv-2016//deploy_length.html")
+
+
+processing file: deploy_length.Rmd
+  |                                                                         |                                                                 |   0%  |                                                                         |......                                                           |  10%
+   inline R code fragments
+
+  |                                                                         |.............                                                    |  20%
+label: setup (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |....................                                             |  30%
+  ordinary text without R code
+
+  |                                                                         |..........................                                       |  40%
+label: packages (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |................................                                 |  50%
+  ordinary text without R code
+
+  |                                                                         |.......................................                          |  60%
+label: get-data (with options) 
+List of 1
+ $ include: logi FALSE
+
+  |                                                                         |..............................................                   |  70%
+  ordinary text without R code
+
+  |                                                                         |....................................................             |  80%
+label: plot-tag-deploy-hist (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+  |                                                                         |..........................................................       |  90%
+  ordinary text without R code
+
+  |                                                                         |.................................................................| 100%
+label: plot-tag-deploy-density (with options) 
+List of 4
+ $ fig.showtext: logi TRUE
+ $ fig.height  : num 4
+ $ warning     : logi FALSE
+ $ echo        : logi FALSE
+
+
+output file: deploy_length.knit.md
+
+/usr/local/bin/pandoc +RTS -K512m -RTS deploy_length.utf8.md --to html --from markdown+autolink_bare_uris+ascii_identifiers+tex_math_single_backslash --output www-aleutpv-2016//deploy_length.html --smart --email-obfuscation none --self-contained '--variable=agency-logo:/Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/noaa-fisheries-rgb-stacked.png' --standalone --section-divs --template /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/template.html --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/uswds-0.11.0/css/uswds.min.css --css /Users/josh.london/Library/R/3.3/library/uswebr/rmarkdown/templates/usweb/resources/styles.css --mathjax --variable 'mathjax-url:https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --no-highlight --variable highlightjs=/Users/josh.london/Library/R/3.3/library/rmarkdown/rmd/h/highlight --include-in-header /var/folders/kz/n0g4srt56zg6b5156g0l1cmm1810jj/T//Rtmpdqi2dH/usweb_includes.html 
+
+Output created: www-aleutpv-2016//deploy_length.html
+> 
+> system("aws s3 sync www-aleutpv-2016 s3://www-aleutpv-2016")
+upload: www-aleutpv-2016/deploy_length.html to s3://www-aleutpv-2016/deploy_length.html
+Completed 1 of 36 part(s) with 35 file(s) remainingupload: www-aleutpv-2016/reports/PV2016_3008_status_report.html to s3://www-aleutpv-2016/reports/PV2016_3008_status_report.html
+Completed 2 of 36 part(s) with 34 file(s) remainingupload: www-aleutpv-2016/reports/PV2014_2005_status_report.html to s3://www-aleutpv-2016/reports/PV2014_2005_status_report.html
+Completed 3 of 36 part(s) with 33 file(s) remainingupload: www-aleutpv-2016/reports/PV2016_3011_status_report.html to s3://www-aleutpv-2016/reports/PV2016_3011_status_report.html
+Completed 4 of 36 part(s) with 32 file(s) remainingupload: www-aleutpv-2016/reports/PV2016_3009_status_report.html to s3://www-aleutpv-2016/reports/PV2016_3009_status_report.html
+Completed 5 of 36 part(s) with 31 file(s) remainingupload: www-aleutpv-2016/reports/PV2016_3007_status_report.html to s3://www-aleutpv-2016/reports/PV2016_3007_status_report.html
+Completed 6 of 36 part(s) with 30 file(s) remainingupload: www-aleutpv-2016/reports/PV2016_3002_status_report.html to s3://www-aleutpv-2016/reports/PV2016_3002_status_report.html
+Completed 7 of 36 part(s) with 29 file(s) remainingupload: www-aleutpv-2016/reports/PV2016_3004_status_report.html to s3://www-aleutpv-2016/reports/PV2016_3004_status_report.html
+Completed 8 of 36 part(s) with 28 file(s) remainingupload: www-aleutpv-2016/reports/PV2016_3001_status_report.html to s3://www-aleutpv-2016/reports/PV2016_3001_status_report.html
+Completed 9 of 36 part(s) with 27 file(s) remainingupload: www-aleutpv-2016/reports/PV2016_3012_status_report.html to s3://www-aleutpv-2016/reports/PV2016_3012_status_report.html
+Completed 10 of 36 part(s) with 26 file(s) remainingupload: www-aleutpv-2016/reports/PV2016_3013_status_report.html to s3://www-aleutpv-2016/reports/PV2016_3013_status_report.html
+Completed 11 of 36 part(s) with 25 file(s) remainingupload: www-aleutpv-2016/reports/PV2016_3003_status_report.html to s3://www-aleutpv-2016/reports/PV2016_3003_status_report.html
+Completed 12 of 36 part(s) with 24 file(s) remainingupload: www-aleutpv-2016/reports/PV2016_3005_status_report.html to s3://www-aleutpv-2016/reports/PV2016_3005_status_report.html
+Completed 13 of 36 part(s) with 23 file(s) remainingupload: www-aleutpv-2016/reports/PV2016_3015_status_report.html to s3://www-aleutpv-2016/reports/PV2016_3015_status_report.html
+Completed 14 of 36 part(s) with 22 file(s) remainingupload: www-aleutpv-2016/reports/PV2016_3014_status_report.html to s3://www-aleutpv-2016/reports/PV2016_3014_status_report.html
+Completed 15 of 36 part(s) with 21 file(s) remainingupload: www-aleutpv-2016/reports/PV2016_3020_status_report.html to s3://www-aleutpv-2016/reports/PV2016_3020_status_report.html
+Completed 16 of 36 part(s) with 20 file(s) remainingupload: www-aleutpv-2016/reports/PV2016_3017_status_report.html to s3://www-aleutpv-2016/reports/PV2016_3017_status_report.html
+Completed 17 of 36 part(s) with 19 file(s) remainingupload: www-aleutpv-2016/reports/PV2016_3019_status_report.html to s3://www-aleutpv-2016/reports/PV2016_3019_status_report.html
+Completed 18 of 36 part(s) with 18 file(s) remainingupload: www-aleutpv-2016/reports/PV2016_3025_status_report.html to s3://www-aleutpv-2016/reports/PV2016_3025_status_report.html
+Completed 19 of 36 part(s) with 17 file(s) remainingupload: www-aleutpv-2016/reports/PV2016_3016_status_report.html to s3://www-aleutpv-2016/reports/PV2016_3016_status_report.html
+Completed 20 of 36 part(s) with 16 file(s) remainingupload: www-aleutpv-2016/reports/PV2016_3023_status_report.html to s3://www-aleutpv-2016/reports/PV2016_3023_status_report.html
+Completed 21 of 36 part(s) with 15 file(s) remainingupload: www-aleutpv-2016/reports/PV2016_3027_status_report.html to s3://www-aleutpv-2016/reports/PV2016_3027_status_report.html
+Completed 22 of 36 part(s) with 14 file(s) remainingupload: www-aleutpv-2016/reports/PV2016_3026_status_report.html to s3://www-aleutpv-2016/reports/PV2016_3026_status_report.html
+Completed 23 of 36 part(s) with 13 file(s) remainingupload: www-aleutpv-2016/reports/PV2016_3018_status_report.html to s3://www-aleutpv-2016/reports/PV2016_3018_status_report.html
+Completed 24 of 36 part(s) with 12 file(s) remainingupload: www-aleutpv-2016/reports/PV2016_3021_status_report.html to s3://www-aleutpv-2016/reports/PV2016_3021_status_report.html
+Completed 25 of 36 part(s) with 11 file(s) remainingupload: www-aleutpv-2016/reports/PV2016_3024_status_report.html to s3://www-aleutpv-2016/reports/PV2016_3024_status_report.html
+Completed 26 of 36 part(s) with 10 file(s) remainingupload: www-aleutpv-2016/reports/PV2016_3022_status_report.html to s3://www-aleutpv-2016/reports/PV2016_3022_status_report.html
+Completed 27 of 36 part(s) with 9 file(s) remainingupload: www-aleutpv-2016/reports/PV2016_3032_status_report.html to s3://www-aleutpv-2016/reports/PV2016_3032_status_report.html
+Completed 28 of 36 part(s) with 8 file(s) remainingupload: www-aleutpv-2016/reports/PV2016_3030_status_report.html to s3://www-aleutpv-2016/reports/PV2016_3030_status_report.html
+Completed 29 of 36 part(s) with 7 file(s) remainingupload: www-aleutpv-2016/reports/PV2016_3031_status_report.html to s3://www-aleutpv-2016/reports/PV2016_3031_status_report.html
+Completed 30 of 36 part(s) with 6 file(s) remainingupload: www-aleutpv-2016/reports/PV2016_3033_status_report.html to s3://www-aleutpv-2016/reports/PV2016_3033_status_report.html
+Completed 31 of 36 part(s) with 5 file(s) remainingupload: www-aleutpv-2016/reports/PV2016_3029_status_report.html to s3://www-aleutpv-2016/reports/PV2016_3029_status_report.html
+Completed 32 of 36 part(s) with 4 file(s) remainingupload: www-aleutpv-2016/reports/PV2016_3034_status_report.html to s3://www-aleutpv-2016/reports/PV2016_3034_status_report.html
+Completed 33 of 36 part(s) with 3 file(s) remainingupload: www-aleutpv-2016/reports/PV2016_3035_status_report.html to s3://www-aleutpv-2016/reports/PV2016_3035_status_report.html
+Completed 34 of 36 part(s) with 2 file(s) remainingupload: www-aleutpv-2016/reports/PV2016_3010_status_report.html to s3://www-aleutpv-2016/reports/PV2016_3010_status_report.html
+Completed 35 of 36 part(s) with 1 file(s) remainingupload: www-aleutpv-2016/reports/PV2016_3028_status_report.html to s3://www-aleutpv-2016/reports/PV2016_3028_status_report.html
+> 
+> proc.time()
+   user  system elapsed 
+103.831   5.801 330.803 

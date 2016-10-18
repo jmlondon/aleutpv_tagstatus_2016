@@ -1,0 +1,138 @@
+---
+title: "Aleutian Harbor Seals 2016"
+subtitle: "post-release behavior for LHX surgical animals"
+draft: true
+author:
+- name: Josh M. London
+  affiliation: 1
+address:
+- code: 1
+  address: Alaska Fisheries Science Center, NOAA Fisheries, Seattle, Washington, USA
+  email: josh.london@noaa.gov
+  orcid: orcid.org/0000-0002-3647-5046
+date: "`r format(Sys.Date(), '%d %B, %Y')`"
+disclaimer: >
+  The scientific results and conclusions, as well as any views or opinions 
+  expressed herein, are those of the author(s) and do not necessarily reflect 
+  those of NOAA or the Department of Commerce.
+abstract: >
+  This document provides updated summaries and display graphics for satellite tags deployed on 10 harbor seals during the 2016 Aleutian harbor seal research cruise. These 10 animals were surgically implanted with Life History Tags (LHX). Two external satellite telemetry devices were adhered to the hair of the animals in order to provide movement and dive behavior for the post-release recovery period.
+output:
+  html_document:
+    uswebr::uswds_report
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r load-packages, include = FALSE}
+library(wcUtils)
+library(dplyr)
+library(lubridate)
+library(rgdal)
+```
+
+```{r load-data, include = FALSE}
+library(dplyr)
+library(wcUtils)
+
+histo_files <- list.files('data/lhx', 
+                          pattern = "*-Histos.csv", 
+                          full.names = TRUE,
+                          recursive = TRUE)
+histo_list <- lapply(histo_files, wcUtils::read_histos)
+timelines <- lapply(histo_list,wcUtils::tidyTimelines) %>% 
+  dplyr::bind_rows() %>% 
+  dplyr::mutate(solar_hour = lubridate::hour(datadatetime + 
+                                               lubridate::dhours(11.5))) %>% 
+  rowwise() %>% 
+  dplyr::mutate(speno = paste(unlist(strsplit(deployid,"_"))[1:2], 
+                              collapse = "_"))
+
+behav_files <- list.files('data/lhx', 
+                          pattern = "*-Behavior.csv", 
+                          full.names = TRUE,
+                          recursive = TRUE)
+behav_list <- lapply(behav_files, wcUtils::read_behav)
+behavior <- behav_list %>% 
+  dplyr::bind_rows() %>% 
+  dplyr::rowwise() %>% 
+  dplyr::mutate(speno = paste(unlist(strsplit(deployid,"_"))[1:2], 
+                              collapse = "_"),
+                surface_time = 100 * (shallow / (shallow + deep)))
+
+loc_files <- list.files('data/lhx', 
+                          pattern = "-[0-9]+-Locations.csv", 
+                          full.names = TRUE,
+                          recursive = TRUE)
+loc_list <- lapply(loc_files, wcUtils::read_locs)
+locs <- loc_list %>% 
+  dplyr::bind_rows() %>% 
+  dplyr::rowwise() %>% 
+  dplyr::mutate(speno = paste(unlist(strsplit(deployid,"_"))[1:2], 
+                              collapse = "_"))
+
+
+
+```
+
+```{r plot-timeline-heatmaps, fig.showtext=TRUE, fig.height=6, warning = FALSE, echo=FALSE}
+library(ggplot2)
+library(ggthemes)
+library(viridis)
+library(sp)
+library(leaflet)
+
+for(s in sort(unique(locs$speno))) {
+  
+  this_locs <- locs %>% dplyr::filter(speno == s) %>% 
+    dplyr::arrange(date_time) %>% data.frame()
+  coordinates(this_locs) <- ~longitude+latitude
+  proj4string(this_locs) <- CRS("+init=epsg:4326")
+  this_locs <- sp::spTransform(this_locs,CRS("+proj=longlat +lon_wrap=180"))
+  this_track <- as(this_locs, "SpatialLines")
+  
+  locs_start <- subset(this_locs,date_time == min(this_locs$date_time))
+  locs_end <- subset(this_locs,date_time == max(this_locs$date_time))
+  
+  p <- timelines %>% dplyr::filter(speno == s) %>% 
+  ggplot(aes(x = lubridate::date(datadatetime), 
+                           y = solar_hour,
+                           fill = percent_dry)) +
+  geom_tile() +
+  scale_y_continuous(breaks = c(6,12,18)) +
+  scale_fill_viridis(name = "Percent Dry",
+                     guide = guide_colorbar(
+                       title.position = "bottom",
+                       barwidth = 25, barheight = 1 )) +
+  theme_fivethirtyeight(base_family = "Source Sans Pro") +
+  theme(axis.title = element_text()) +
+  ylab("local solar hour") + xlab("") +
+  ggtitle(paste(s,"- Haul-out Behavior by Local Solar Hour")) +
+  theme(panel.grid.major.x = element_blank()) 
+  print(p)
+
+  behav_data <- behavior %>% dplyr::filter(speno == s) 
+  p <-  ggplot() + 
+  geom_rect(data=subset(behav_data,what=="Dive"),
+            aes(xmin=start,xmax=end,ymin=-2,ymax=-1*depthmax),linetype=0,
+            fill = ggthemes::ptol_pal()(3)[1]) +
+  geom_rect(data=subset(behav_data,what=="Surface" & shallow > deep),
+            aes(xmin=start,xmax=end,ymin=-4,ymax=0,fill=surface_time),
+            linetype=0) +
+  geom_rect(data=subset(behav_data,what=="Surface" & shallow < deep),
+            aes(xmin=start,xmax=end,ymin=-10,ymax=-4,fill=surface_time),
+            linetype=0) +
+  scale_fill_distiller(palette = "PuOr",
+                     name = "Surface Time",
+                     guide = guide_colorbar(
+                       title.position = "bottom",
+                       barwidth = 25, barheight = 1 )) +
+  theme_fivethirtyeight(base_family = "Source Sans Pro") +
+  theme(axis.title = element_text()) +
+  xlab("Date (UTC)") + ylab("Depth (m)") + ggtitle(paste(s,"- Dive Behavior")) + theme(strip.text.y = element_text(size = 7))
+print(p)
+}
+```

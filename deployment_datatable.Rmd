@@ -1,0 +1,59 @@
+---
+date: "`r format(Sys.Date(), '%d %B, %Y')`"
+disclaimer: >
+  The scientific results and conclusions, as well as any views or opinions 
+  expressed herein, are those of the author(s) and do not necessarily reflect   those of NOAA or the Department of Commerce.
+output:
+  html_document:
+    uswebr::uswds_report
+---
+
+```{r results="asis", echo=FALSE}
+cat("
+<style>
+table td, table th {
+    font-size: 100%;
+}
+</style>
+")
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r load-packages, include = FALSE}
+library(wcUtils)
+library(dplyr)
+library(DT)
+library(reshape2)
+library(lubridate)
+library(rgdal)
+library(sp)
+library(leaflet)
+library(argosfilter)
+library(ggplot2)
+library(ggthemes)
+library(viridis)
+```
+
+## Telemetry Deployments and Seal Metadata
+
+This table provides a more detailed listing of information related to each tag deployment and the seal it was deployed on. The table can be sorted or filtered by search terms to more easily locate specific information.
+
+```{r, deploy-table,echo = FALSE,message = FALSE}
+deployments <- readr::read_csv('data/deploy.csv')
+
+deployments <- deployments %>% 
+  reshape2::melt(id.vars = c("speno","lhx","age","sex","mass")) %>% 
+  tidyr::separate(variable,c("tagtype","idtype"),"_",remove=TRUE) %>% 
+  tidyr::spread(idtype,value) %>% 
+  dplyr::filter(!is.na(deployid)) %>% 
+  dplyr::select(speno,age,sex,mass,lhx,deployid,ptt,tagtype) %>% 
+  dplyr::arrange(speno)
+datatable(deployments,options = list(paging = FALSE),
+          filter = "none",
+          class="usa-table-borderless",
+          height = "600",width="805",
+          rownames = FALSE)
+```

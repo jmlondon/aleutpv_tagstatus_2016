@@ -1,0 +1,96 @@
+---
+date: "`r format(Sys.Date(), '%d %B, %Y')`"
+disclaimer: >
+  The scientific results and conclusions, as well as any views or opinions 
+  expressed herein, are those of the author(s) and do not necessarily reflect   those of NOAA or the Department of Commerce.
+output:
+  html_document:
+    uswebr::uswds_report
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r packages, include=FALSE}
+library(wcUtils)
+library(dplyr)
+library(lubridate)
+library(ggplot2)
+library(ggthemes)
+
+```
+
+## Tag Deployment Length
+
+Deployment length is of keen interest because the longer the satellite tags transmit, the more information we learn about harbor seals in the ALeutians. The SPLASH tags are programmed to collect and transmit data for up to 9 months but could fall off earlier since they are adhered to the seals' hair. The SPOT tags are attached more securely to the webbing of the rear flipper and could transmit for up to 2 years.
+
+```{r get-data, include = FALSE}
+deployments <- readr::read_csv('data/deploy.csv')
+
+deployments <- deployments %>% 
+  reshape2::melt(id.vars = c("speno","lhx","age","sex","mass")) %>% 
+  tidyr::separate(variable,c("tagtype","idtype"),"_",remove=TRUE) %>% 
+  tidyr::spread(idtype,value) %>% 
+  dplyr::filter(!is.na(deployid)) %>% 
+  dplyr::select(deployid,tagtype)
+
+wc_response <- wcUtils::wcPOST()
+aleutpv2016_ids <- wcGetProjectIDs(wc_response, project = "AleutPV-2016")
+
+# we'll store the returned list of data frames in a list
+data_list <- vector("list",length(aleutpv2016_ids))
+
+for (i in 1:length(aleutpv2016_ids)) {
+  data_list[[i]] <- wcUtils::wcGetDownload(aleutpv2016_ids[i])
+  if (!is.null(data_list[[i]]$all_locations)) {
+    data_list[[i]]$locations <- data_list[[i]]$all_locations
+  }
+}
+
+aleutpv2016_data <- vector("list")
+
+aleutpv2016_data$messages <-
+  dplyr::bind_rows(plyr::llply(data_list,function(x) x$messages))
+
+msg_dt <- aleutpv2016_data$messages %>% 
+      dplyr::select(deployid,msg_date) %>% 
+      dplyr::group_by(deployid) %>% 
+      dplyr::summarise(deploy_start=min(msg_date),
+                       deploy_end=max(msg_date)) %>% 
+      dplyr::mutate(deploy_len=difftime(
+                         deploy_end,deploy_start,
+                         units="days")) %>% 
+      dplyr::left_join(deployments,by="deployid") %>% 
+      dplyr::filter(!is.na(tagtype))
+```
+
+```{r plot-tag-deploy-hist,fig.showtext=TRUE, fig.height=4, warning = FALSE, echo=FALSE}
+p <- ggplot(msg_dt,aes(x=as.numeric(deploy_len),fill=tagtype)) +
+  geom_histogram(binwidth = 1) +
+  scale_fill_ptol() +
+  theme_fivethirtyeight() +
+  theme(axis.title = element_text()) +
+  ylab("count") + xlab("deploy length (days)") +
+  ggtitle(paste("Deployment Length of Telemetry Devices")) +
+  theme(panel.grid.major.x = element_blank()) 
+
+print(p)
+
+
+```
+
+```{r plot-tag-deploy-density,fig.showtext=TRUE, fig.height=4, warning = FALSE, echo=FALSE}
+p <- ggplot(msg_dt,aes(x=as.numeric(deploy_len),fill=tagtype)) +
+  geom_density(alpha=0.5) +
+  scale_fill_ptol() +
+  theme_fivethirtyeight() +
+  theme(axis.title = element_text()) +
+  ylab("count") + xlab("deploy length (days)") +
+  ggtitle(paste("Deployment Length of Telemetry Devices (Density)")) +
+  theme(panel.grid.major.x = element_blank()) 
+
+print(p)
+
+
+```

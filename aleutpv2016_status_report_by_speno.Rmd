@@ -1,0 +1,300 @@
+---
+date: "`r format(Sys.Date(), '%d %B, %Y')`"
+disclaimer: >
+  The scientific results and conclusions, as well as any views or opinions 
+  expressed herein, are those of the author(s) and do not necessarily reflect   those of NOAA or the Department of Commerce.
+output:
+  html_document:
+    uswebr::uswds_report
+params:
+   speno: PV2016_3001
+   spot_deployid: PV2016_3001_15U2973
+   splash_deployid: PV2016_3001_16A0227
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r load-packages, include = FALSE}
+library(wcUtils)
+library(dplyr)
+library(lubridate)
+library(rgdal)
+library(sp)
+library(leaflet)
+library(argosfilter)
+library(ggplot2)
+library(ggthemes)
+library(viridis)
+```
+
+```{r get-data, include = FALSE}
+wc_response <- wcUtils::wcPOST()
+spot_dat <- try(wcUtils::wcGetDeployID(wc_response,deployid = params$spot_deployid),
+                silent = TRUE)
+splash_dat <- try(wcUtils::wcGetDeployID(wc_response, deployid = params$splash_deployid),
+                  silent = TRUE)
+if(inherits(spot_dat,"try-error")) { 
+  spot_timelines <- NULL
+  spot_msg_dt <- NULL
+  }
+if(inherits(splash_dat,"try-error")) { 
+  splash_timelines <- NULL
+  splash_msg_dt <- NULL
+  }
+
+if (!inherits(spot_dat, "try-error")) {
+spot_dat$zipfile <- wcUtils::wcGetZip(id = spot_dat$ids)
+spot_dat$dat_files <- unzip(spot_dat$zipfile, exdir = tempdir())
+spot_histo_file <- spot_dat$dat_files[grep("*-Histos.csv", 
+                                            spot_dat$dat_files)]
+spot_histos <- wcUtils::read_histos(spot_histo_file)
+spot_timelines <- NULL
+if(!inherits(spot_histos,"try-error") && nrow(spot_histos$histos) > 1) {
+spot_timelines <- wcUtils::tidyTimelines(spot_histos) %>% 
+  mutate(datadatetime = datadatetime + lubridate::dhours(11.5),
+         solar_hour = lubridate::hour(datadatetime),
+         type = 'SPOT')
+}
+spot_msg_file <- spot_dat$dat_files[grep("*-All.csv",
+                                          spot_dat$dat_files)]
+spot_msg_dt <- wcUtils::read_allmsg(spot_msg_file) %>% 
+      dplyr::select(msg_date) %>% 
+      dplyr::mutate(msg_hour = lubridate::floor_date(msg_date,"hour")) %>%
+      dplyr::group_by(msg_hour) %>% 
+      dplyr::summarise(msg_count=n())
+spot_msg_seq <- data.frame(msg_hour = 
+                            seq(min(spot_msg_dt$msg_hour),
+                                max(spot_msg_dt$msg_hour + lubridate::hours(1)),
+                                by='1 hour'))
+spot_msg_dt <- spot_msg_seq %>% dplyr::left_join(spot_msg_dt, by='msg_hour') %>% 
+      dplyr::mutate(msg_count = ifelse(is.na(msg_count),0,msg_count),
+                    type = 'SPOT') %>% 
+      dplyr::arrange(msg_hour)
+spot_locs_data <- spot_dat$dat_files[grep(paste0("*",spot_dat$df$ptt,"-Locations.csv"), 
+                                 spot_dat$dat_files)]
+spot_locs_data <- try(read.csv(spot_locs_data))
+}
+
+if (!inherits(splash_dat, "try-error")) {
+splash_dat$zipfile <- wcUtils::wcGetZip(id = splash_dat$ids)
+splash_dat$dat_files <- unzip(splash_dat$zipfile, exdir = tempdir())
+
+splash_histo_file <- splash_dat$dat_files[grep("*-Histos.csv", 
+                                            splash_dat$dat_files)]
+splash_histos <- try(wcUtils::read_histos(splash_histo_file), 
+                     silent = TRUE)
+splash_timelines <- NULL
+if(!inherits(splash_histos,"try-error") && nrow(splash_histos$histos) > 1) {
+splash_timelines <- wcUtils::tidyTimelines(splash_histos) %>% 
+  mutate(datadatetime = datadatetime + lubridate::dhours(11.5),
+         solar_hour = lubridate::hour(datadatetime),
+         type = 'SPLASH')
+}
+splash_msg_file <- splash_dat$dat_files[grep("*-All.csv",
+                                          splash_dat$dat_files)]
+
+splash_msg_dt <- wcUtils::read_allmsg(splash_msg_file) %>% 
+      dplyr::select(msg_date) %>% 
+      dplyr::mutate(msg_hour = lubridate::floor_date(msg_date,"hour")) %>%
+      dplyr::group_by(msg_hour) %>% 
+      dplyr::summarise(msg_count=n())
+splash_msg_seq <- data.frame(msg_hour = 
+                            seq(min(splash_msg_dt$msg_hour),
+                                max(splash_msg_dt$msg_hour + lubridate::hours(1)),
+                                by='1 hour'))
+splash_msg_dt <- splash_msg_seq %>% dplyr::left_join(splash_msg_dt, by='msg_hour') %>% 
+      dplyr::mutate(msg_count = ifelse(is.na(msg_count),0,msg_count),
+                    type = 'SPLASH') %>% 
+      dplyr::arrange(msg_hour)
+locs_fastgps <- try(
+  splash_dat$dat_files[grep(paste0("*",splash_dat$df$ptt,"-[0-9]+-Locations.csv"), 
+                                   splash_dat$dat_files)]
+)
+splash_locs_data <- splash_dat$dat_files[grep(paste0("*",splash_dat$df$ptt,"-Locations.csv"), 
+                                 splash_dat$dat_files)]
+locs_fastgps <- try(wcUtils::read_locs(locs_fastgps))
+splash_locs_data <- try(wcUtils::read_locs(splash_locs_data))
+    
+if (!inherits(locs_fastgps, "try-error")) {
+      message(paste('including fastgps data for deployid',splash_dat$df$deployid))
+      splash_locs_data <- locs_fastgps
+} 
+
+# filter by speed only
+mfilter <- argosfilter::vmask(splash_locs_data$latitude,
+               splash_locs_data$longitude,
+               splash_locs_data$date_time,10)
+splash_locs_data <- splash_locs_data[which(mfilter=="not"),]
+
+behav_file <- try(splash_dat$dat_files[grep("*-Behavior.csv", splash_dat$dat_files)])
+behavior <- wcUtils::read_behav(behav_file) %>% 
+  dplyr::rowwise() %>% 
+  dplyr::mutate(surface_time = 100 * (shallow / (shallow + deep)))
+}
+
+if(!is.null(spot_msg_dt) && !is.null(splash_msg_dt)) {
+msg_dt <- dplyr::bind_rows(splash_msg_dt,spot_msg_dt)
+}
+if(!is.null(splash_msg_dt) && is.null(spot_msg_dt)) {
+  msg_dt <- splash_msg_dt
+}
+max_date <- max(msg_dt$msg_hour)
+```
+
+## Observed Locations for `r params$speno`
+
+Location data are provided by the SPLASH tag adhered to the seal's hair on either the head or back. For many of the tags deployed during this project, both Argos-based locations and FastLoc/GPS locations are available. While most of the seals also received a flipper-mounted SPOT tag, location data from those tags are not included in this map. A very course speed filter (all steps must be result in a speed less than 10 meters per second) has been applied to remove obviously erroneous locations.
+
+```{r leaflet-map, echo=FALSE}
+
+coordinates(splash_locs_data) <- ~longitude+latitude
+proj4string(splash_locs_data) <- CRS("+init=epsg:4326")
+splash_locs_data <- sp::spTransform(splash_locs_data,CRS("+proj=longlat +lon_wrap=180"))
+splash_locs_track <- as(splash_locs_data,"SpatialLines")
+
+esri_wrld_ocean <- 
+  "http://services.arcgisonline.com/arcgis/rest/services/Ocean/World_Ocean_Base/MapServer/tile/{z}/{y}/{x}"
+    esri_wrld_ocean_ref <- 
+      "http://services.arcgisonline.com/arcgis/rest/services/Ocean/World_Ocean_Reference/MapServer/tile/{z}/{y}/{x}"
+    esri_wrld_ocean_attr <- 
+      "Tiles &copy; Esri &mdash; Sources: GEBCO, NOAA, CHS, OSU, UNH, CSUMB, National Geographic, DeLorme, NAVTEQ, and Esri"
+    
+pal <- colorFactor(c("#F19320","#762A83","#EE3333"), domain = c("Argos", "FastGPS","User"))
+
+map <- leaflet(splash_locs_data, width="100%") %>%
+        addTiles(urlTemplate = esri_wrld_ocean,
+                         attribution = esri_wrld_ocean_attr
+                         ) %>%
+        addTiles(urlTemplate = esri_wrld_ocean_ref,
+                 attribution = esri_wrld_ocean_attr) %>% 
+        addPolylines(data = splash_locs_track, weight = 2, color = 'black',
+                     group = "Trackline") %>%
+        addCircleMarkers(
+          radius = 3,
+          stroke = FALSE,
+          color = ~pal(type),
+          fillOpacity = 1
+        ) %>% 
+        addLegend(pal = pal,
+                  values = ~type,
+                  title = "Location Type",opacity = 1)
+map
+```
+
+## Haul-out Behavior
+
+Both the SPLASH and SPOT tags provide haul-out timeline data in the form our hourly percent-dry values. Data are presented as separate components in the plot below. Data are transmitted via the Argos satellite system as messages that cover an entire 24-hour UTC day. Due to the buffer and transmission limits on the tags, there may be days missing from the plot. Hopefully, those data will fill in over time.
+
+```{r haul-out-plot, fig.showtext=TRUE, fig.height=4, warning = FALSE, echo=FALSE}
+if (!is.null(splash_timelines) && !is.null(spot_timelines)) {
+p <- dplyr::bind_rows(splash_timelines,spot_timelines) %>% 
+  ggplot(aes(x = lubridate::date(datadatetime), 
+                           y = solar_hour,
+                           fill = percent_dry)) +
+  geom_tile() +
+  scale_y_continuous(breaks = c(6,12,18)) +
+  scale_fill_viridis(name = "Percent Dry",
+                     guide = guide_colorbar(
+                       title.position = "bottom",
+                       barwidth = 25, barheight = 1 )) +
+  facet_wrap(~type, nrow = 2) +
+  theme_fivethirtyeight(base_family = "Source Sans Pro",
+                        base_size = 18) +
+  theme(axis.title = element_text()) +
+  ylab("local solar hour") + xlab("") +
+  ggtitle(paste(params$speno,"- Haul-out Behavior by Local Solar Hour")) +
+  theme(panel.grid.major.x = element_blank()) 
+  print(p)
+}
+if(is.null(spot_timelines) && !is.null(splash_timelines)) {
+p <- splash_timelines %>% 
+  ggplot(aes(x = lubridate::date(datadatetime), 
+                           y = solar_hour,
+                           fill = percent_dry)) +
+  geom_tile() +
+  scale_y_continuous(breaks = c(6,12,18)) +
+  scale_fill_viridis(name = "Percent Dry",
+                     guide = guide_colorbar(
+                       title.position = "bottom",
+                       barwidth = 25, barheight = 1 )) +
+  facet_wrap(~type, nrow = 2) +
+  theme_fivethirtyeight(base_family = "Source Sans Pro",
+                        base_size = 18) +
+  theme(axis.title = element_text()) +
+  ylab("local solar hour") + xlab("") +
+  ggtitle(paste(params$speno,"- Haul-out Behavior by Local Solar Hour")) +
+  theme(panel.grid.major.x = element_blank()) 
+  print(p)
+}
+if(is.null(splash_timelines) && !is.null(spot_timelines)) {
+p <- spot_timelines %>% 
+  ggplot(aes(x = lubridate::date(datadatetime), 
+                           y = solar_hour,
+                           fill = percent_dry)) +
+  geom_tile() +
+  scale_y_continuous(breaks = c(6,12,18)) +
+  scale_fill_viridis(name = "Percent Dry",
+                     guide = guide_colorbar(
+                       title.position = "bottom",
+                       barwidth = 25, barheight = 1 )) +
+  facet_wrap(~type, nrow = 2) +
+  theme_fivethirtyeight(base_family = "Source Sans Pro",
+                        base_size = 18) +
+  theme(axis.title = element_text()) +
+  ylab("local solar hour") + xlab("") +
+  ggtitle(paste(params$speno,"- Haul-out Behavior by Local Solar Hour")) +
+  theme(panel.grid.major.x = element_blank()) 
+  print(p)
+}
+if(is.null(splash_timelines) && is.null(spot_timelines)) {
+  p <- NULL
+}
+```
+
+## Dive Behavior
+
+Dive behavior messages provide details on two categories of activity. An individual 'dive' is defined as a consecutive period of depths below 2 meters that also exceeds 10 meters of depth for more than 10 seconds. For each dive, the start time and end time is recorded as well as the maximum depth. 'Surface' activity is defined as a consectutive period less than 10 meters. For each identified 'surface' period, the behavior is further split into depths from 0-4 meters and from 4-10 meters. Each 'surface' record provides the number of seconds spent in each of the depth categories. In the plot below, the 'surface time' represents the percentage of time in each of the depth categories.
+
+```{r dive-behav-plot, fig.showtext=TRUE, fig.height=6, warning = FALSE, echo=FALSE}
+  p <-  ggplot() + 
+  geom_rect(data=subset(behavior,what=="Surface"),
+            aes(xmin=start,xmax=end,ymin=-4,ymax=0,fill=surface_time),
+            linetype=0) +
+  geom_rect(data=subset(behavior,what=="Surface"),
+            aes(xmin=start,xmax=end,ymin=-10,ymax=-4,fill=100-surface_time),
+            linetype=0) +
+  scale_fill_distiller(palette = "Greens", direction = 1,
+                     name = "Surface Time",
+                     guide = guide_colorbar(
+                       title.position = "bottom",
+                       barwidth = 25, barheight = 1 )) +
+  geom_rect(data=subset(behavior,what=="Dive"),
+            aes(xmin=start,xmax=end,ymin=-2,ymax=-1*depthmax),linetype=0,
+            fill = ggthemes::ptol_pal()(3)[1]) +
+  #expand_limits(x=max_date) +
+  theme_fivethirtyeight(base_family = "Source Sans Pro",
+                        base_size = 18) +
+  theme(axis.title = element_text()) +
+  xlab("Date (UTC)") + ylab("Depth (m)") + ggtitle(paste(params$speno,"- Dive Behavior")) + theme(strip.text.y = element_text(size = 7))
+print(p)
+```
+
+## Message Transmission
+
+Examination of messages received can help troubleshoot issues and evaluate performance.
+
+```{r msg-tx-plot,fig.showtext=TRUE, fig.height=4, warning = FALSE, echo=FALSE}
+p <- ggplot(msg_dt,aes(x=msg_hour,y=msg_count)) + 
+  geom_line() + 
+  facet_wrap(~type, nrow=2) + 
+  theme_fivethirtyeight(base_family = "Source Sans Pro",
+                        base_size = 18) +
+  theme(axis.title = element_text()) +
+  xlab("Date (UTC)") + ylab("Messages Transmitted/Hour") + 
+  ggtitle(paste(params$speno,"- Message Transmission")) +
+  theme(strip.text.y = element_text(size = 7))
+print(p)
+```
