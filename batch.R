@@ -1,3 +1,11 @@
+if (Sys.info()['sysname'] == "Linux") {
+Sys.setenv(RSTUDIO_PANDOC = "~/.local/bin/pandoc")
+}
+
+if (Sys.info()['sysname'] == "Linux") {
+  setwd('/home/ec2-user/aleutpv_tagstatus_2016')
+}
+
 deployments <- readr::read_csv('data/deploy.csv')
 
 for(i in 1:nrow(deployments)) {
