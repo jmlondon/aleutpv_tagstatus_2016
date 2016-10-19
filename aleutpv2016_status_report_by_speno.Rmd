@@ -207,7 +207,7 @@ map
 
 Both the SPLASH and SPOT tags provide haul-out timeline data in the form our hourly percent-dry values. Data are presented as separate components in the plot below. Data are transmitted via the Argos satellite system as messages that cover an entire 24-hour UTC day. Due to the buffer and transmission limits on the tags, there may be days missing from the plot. Hopefully, those data will fill in over time.
 
-```{r haul-out-plot, fig.showtext=TRUE, fig.height=4, warning = FALSE, echo=FALSE}
+```{r haul-out-plot, fig.showtext=TRUE, fig.height=6, warning = FALSE, echo=FALSE}
 if (!is.null(splash_timelines) && !is.null(spot_timelines)) {
 p <- dplyr::bind_rows(splash_timelines,spot_timelines) %>% 
   ggplot(aes(x = lubridate::date(datadatetime), 
@@ -301,7 +301,7 @@ print(p)
 
 Examination of messages received can help troubleshoot issues and evaluate performance.
 
-```{r msg-tx-plot,fig.showtext=TRUE, fig.height=4, warning = FALSE, echo=FALSE}
+```{r msg-tx-plot,fig.showtext=TRUE, fig.height=6, warning = FALSE, echo=FALSE}
 p <- ggplot(msg_dt,aes(x=msg_hour,y=msg_count)) + 
   geom_line() + 
   facet_wrap(~type, nrow=2) + 
