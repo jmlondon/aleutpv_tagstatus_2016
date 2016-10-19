@@ -21,6 +21,25 @@ library(ggthemes)
 
 ```
 
+```{r theme538, include=FALSE}
+if (Sys.info()['sysname'] == "Linux") {
+  theme_fivethirtyeight <- function(...) {
+    ggthemes::theme_fivethirtyeight(
+      base_size = 26,
+      base_family = "Source Sans Pro"
+    )
+  }
+}
+if (Sys.info()['sysname'] == "Darwin") {
+  theme_fivethirtyeight <- function(...) {
+    ggthemes::theme_fivethirtyeight(
+      base_size = 14,
+      base_family = "Source Sans Pro"
+    )
+  }
+}
+```
+
 ## Tag Deployment Length
 
 Deployment length is of keen interest because the longer the satellite tags transmit, the more information we learn about harbor seals in the ALeutians. The SPLASH tags are programmed to collect and transmit data for up to 9 months but could fall off earlier since they are adhered to the seals' hair. The SPOT tags are attached more securely to the webbing of the rear flipper and could transmit for up to 2 years.
