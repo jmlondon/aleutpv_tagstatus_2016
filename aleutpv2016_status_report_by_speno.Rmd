@@ -30,6 +30,25 @@ library(ggthemes)
 library(viridis)
 ```
 
+```{r theme538, include=FALSE}
+if (Sys.info()['sysname'] == "Linux") {
+  theme_fivethirtyeight <- function(...) {
+    ggthemes::theme_fivethirtyeight(
+      base_size = 26,
+      base_family = "Source Sans Pro"
+    )
+  }
+}
+if (Sys.info()['sysname'] == "Darwin") {
+  theme_fivethirtyeight <- function(...) {
+    ggthemes::theme_fivethirtyeight(
+      base_size = 14,
+      base_family = "Source Sans Pro"
+    )
+  }
+}
+```
+
 ```{r get-data, include = FALSE}
 wc_response <- wcUtils::wcPOST()
 spot_dat <- try(wcUtils::wcGetDeployID(wc_response,deployid = params$spot_deployid),
@@ -201,8 +220,7 @@ p <- dplyr::bind_rows(splash_timelines,spot_timelines) %>%
                        title.position = "bottom",
                        barwidth = 25, barheight = 1 )) +
   facet_wrap(~type, nrow = 2) +
-  theme_fivethirtyeight(base_family = "Source Sans Pro",
-                        base_size = 18) +
+  theme_fivethirtyeight() +
   theme(axis.title = element_text()) +
   ylab("local solar hour") + xlab("") +
   ggtitle(paste(params$speno,"- Haul-out Behavior by Local Solar Hour")) +
@@ -221,8 +239,7 @@ p <- splash_timelines %>%
                        title.position = "bottom",
                        barwidth = 25, barheight = 1 )) +
   facet_wrap(~type, nrow = 2) +
-  theme_fivethirtyeight(base_family = "Source Sans Pro",
-                        base_size = 18) +
+  theme_fivethirtyeight() +
   theme(axis.title = element_text()) +
   ylab("local solar hour") + xlab("") +
   ggtitle(paste(params$speno,"- Haul-out Behavior by Local Solar Hour")) +
@@ -241,8 +258,7 @@ p <- spot_timelines %>%
                        title.position = "bottom",
                        barwidth = 25, barheight = 1 )) +
   facet_wrap(~type, nrow = 2) +
-  theme_fivethirtyeight(base_family = "Source Sans Pro",
-                        base_size = 18) +
+  theme_fivethirtyeight() +
   theme(axis.title = element_text()) +
   ylab("local solar hour") + xlab("") +
   ggtitle(paste(params$speno,"- Haul-out Behavior by Local Solar Hour")) +
@@ -275,8 +291,7 @@ Dive behavior messages provide details on two categories of activity. An individ
             aes(xmin=start,xmax=end,ymin=-2,ymax=-1*depthmax),linetype=0,
             fill = ggthemes::ptol_pal()(3)[1]) +
   #expand_limits(x=max_date) +
-  theme_fivethirtyeight(base_family = "Source Sans Pro",
-                        base_size = 18) +
+  theme_fivethirtyeight() +
   theme(axis.title = element_text()) +
   xlab("Date (UTC)") + ylab("Depth (m)") + ggtitle(paste(params$speno,"- Dive Behavior")) + theme(strip.text.y = element_text(size = 7))
 print(p)
@@ -290,8 +305,7 @@ Examination of messages received can help troubleshoot issues and evaluate perfo
 p <- ggplot(msg_dt,aes(x=msg_hour,y=msg_count)) + 
   geom_line() + 
   facet_wrap(~type, nrow=2) + 
-  theme_fivethirtyeight(base_family = "Source Sans Pro",
-                        base_size = 18) +
+  theme_fivethirtyeight() +
   theme(axis.title = element_text()) +
   xlab("Date (UTC)") + ylab("Messages Transmitted/Hour") + 
   ggtitle(paste(params$speno,"- Message Transmission")) +
