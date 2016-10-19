@@ -1,6 +1,6 @@
-if (Sys.info()['sysname'] == "Linux") {
-  Sys.setenv(RSTUDIO_PANDOC = "//home//ec2-user//.local//bin//pandoc")
-}
+# if (Sys.info()['sysname'] == "Linux") {
+#   Sys.setenv(RSTUDIO_PANDOC = "/home/ec2-user/.local/bin/pandoc")
+# }
 
 if (Sys.info()['sysname'] == "Linux") {
   setwd('/home/ec2-user/aleutpv_tagstatus_2016')
