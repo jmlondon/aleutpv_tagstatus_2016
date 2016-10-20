@@ -34,7 +34,7 @@ library(viridis)
 if (Sys.info()['sysname'] == "Linux") {
   theme_fivethirtyeight <- function(...) {
     ggthemes::theme_fivethirtyeight(
-      base_size = 26,
+      base_size = 24,
       base_family = "Source Sans Pro"
     )
   }
